@@ -1,0 +1,10 @@
+{
+  "helloText": {
+    "en": "Hello! I'm Michal, and that's[100].[100].[100].[500] my website.",
+    "pl": "Cześć! Jestem Michał, a to[100].[100].[100].[500] moja strona."
+  },
+  "helloHelpInfo": {
+    "en": "Type in 'help' command to see what you can do here.",
+    "pl": "Wprowadź komendę 'help' żeby zobaczyć co możesz zrobić."
+  }
+}
