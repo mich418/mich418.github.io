@@ -1,0 +1,87 @@
+$namespace: 'mk-info';
+
+.#{$namespace} {
+  padding: 30px 30px 30px 30px;
+
+  &__line {
+    padding-left: 15px;
+    line-height: 20px;
+    min-height: 20px;
+    position: relative;
+
+    &--user-input {
+      &::before {
+        content: '>';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &--user-input-active {
+      &::before {
+        animation: blink .7s infinite;
+      }
+    }
+  }
+
+  &__subline {
+    display: block;
+  }
+
+  &__user-input {
+    min-height: 20px;
+    width: 100%;
+    line-height: 20px;
+    background: none;
+    border: none;
+    font-family: monospace;
+    font-size: 14px;
+    color: var(--text-color-main);
+    padding: 0;
+    margin: 0;
+    resize: none;
+    overflow: hidden;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+
+    45% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+
+    95% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover,
+    &:visited {
+      color: inherit
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
