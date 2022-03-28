@@ -1,4 +1,3 @@
-import './Conzole.scss'
 import {sleep} from './helpers'
 
 interface ClassNames {

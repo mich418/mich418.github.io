@@ -1,5 +1,5 @@
 import './index.scss'
-import App from './App'
+import MKInfo from './MKInfo'
 
 const mainEl: HTMLElement = document.querySelector('#mk-info')
-new App(mainEl).start()
+new MKInfo(mainEl).start()
