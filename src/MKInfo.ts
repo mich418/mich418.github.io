@@ -2,12 +2,16 @@ import Conzole from './Conzole'
 import I18n from './i18n'
 import logo from './logo'
 import translations from './translations.json'
+import Program from './Program'
+import OptionsProgram from './OptionsProgram'
+import EloRapProgram from './EloRapProgram'
 
-class App {
+class MKInfo {
   private mainEl: HTMLElement
   private conzole: Conzole
   private i18n: I18n
   private lang: string
+  private programs: Program[]
 
   constructor(mainEl: HTMLElement) {
     this.mainEl = mainEl
@@ -15,6 +19,10 @@ class App {
     this.conzole = new Conzole(this.mainEl, 'mk-info')
     this.lang = this.getLang()
     this.i18n = new I18n(translations, this.lang, 'en')
+    this.programs = [
+      new OptionsProgram(this.i18n),
+      new EloRapProgram(this.i18n)
+    ]
   }
 
   async start() {
@@ -64,18 +72,26 @@ class App {
 
   private bindInputEvents() {
     this.conzole.onInput(async (inputText) => {
+      const mainCommand = inputText.trim().match(/^.+?(\s|$)/)[0]?.trim() || '';
+      const programToRun = this.programs.find(program => program.getMainCommand() === mainCommand)
 
-      if (inputText.trim() === 'elorap') {
-        await this.elorap()
+      if (programToRun) {
+        const result = await programToRun.run(inputText.replace(/^.+?(\s|$)/, ''))
+        
+        if (result.err) {
+          await this.conzole.print(result.err)
+        }
+
+        if (typeof result.data === 'string') {
+          await this.conzole.print(result.data)
+        }
+      } else {
+        await this.conzole.print(this.i18n.key('unknownProgram', mainCommand))
       }
 
       this.conzole.input()
     })
   }
-
-  private async elorap() {
-    await this.conzole.print('Try this one: [link=https://www.youtube.com/watch?v=F86i8gPgquI]https://www.youtube.com/watch?v=F86i8gPgquI[/link]')
-  }
 }
 
-export default App
+export default MKInfo

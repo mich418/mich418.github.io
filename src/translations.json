@@ -6,5 +6,13 @@
   "helloHelpInfo": {
     "en": "Type in 'help' command to see what you can do here.",
     "pl": "Wprowadź komendę 'help' żeby zobaczyć co możesz zrobić."
+  },
+  "unknownProgram": {
+    "en": "Not sure what you mean by '${0}'",
+    "pl": "Nie jestem pewien co to '${0}'"
+  },
+  "options.unknownThemeError": {
+    "en": "Unknown theme ${0}",
+    "pl": "Nieznany theme ${0}"
   }
 }
