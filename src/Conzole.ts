@@ -22,6 +22,9 @@ class Conzole {
   private classNames: ClassNames
   private busy: boolean = false
   private inputHandlers: inputHandler[] = []
+  private history: string[] = []
+  private histroyIndex: number = -1
+  private beforeHistroyInput: string = ''
 
   constructor(el: HTMLElement, namespace: string = 'conzole') {
     this.mainElement = el
@@ -133,7 +136,6 @@ class Conzole {
 
         if (linksMatch) {
           for (let linkMatch of linksMatch) {
-            console.log(linkMatch)
             const [, linkHref, linkText] = linkMatch.match(/\[link=(.*?)](.*?)\[\/link\]/)
             lineToPrint = lineToPrint.replace(linkMatch, `<a class="${this.classNames.link}" href="${linkHref}" target="_blank">${linkText}</a>`)
           }
@@ -144,6 +146,23 @@ class Conzole {
     }
 
     this.busy = false
+  }
+
+  private addToHistory(inputText: string) {
+    this.history.push(inputText)
+  }
+
+  private goToPrevInHistory() {
+
+  }
+
+  private goToNextInHistory() {
+    
+  }
+
+  private resetHistoryActions() {
+    this.histroyIndex = -1
+    this.beforeHistroyInput = ''
   }
 
   async input() {
@@ -160,13 +179,21 @@ class Conzole {
     
         line.removeEventListener('keyup', keyUpListener)
         line.remove()
-        
+
+        this.addToHistory(inputText)
+        this.resetHistoryActions()
 
         if (inputText.trim()) {
           this.executeInputHandlers(inputText)
         } else {
           this.input()
         }
+      } else if (event.key === 'ArrowUp') {
+        
+      } else if (event.key === 'ArrowDown') {
+        
+      } else {
+        this.histroyIndex === -1
       }
     }
 
