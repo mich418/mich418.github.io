@@ -4,7 +4,10 @@ import logo from './logo'
 import translations from './translations.json'
 import Program from './Program'
 import OptionsProgram from './OptionsProgram'
+import AboutProgram from './AboutProgram'
+import LinksProgram from './LinksProgram'
 import EloRapProgram from './EloRapProgram'
+import optionsManager from './OptionsManager'
 
 class MKInfo {
   private mainEl: HTMLElement
@@ -14,6 +17,7 @@ class MKInfo {
   private programs: Program[]
 
   constructor(mainEl: HTMLElement) {
+    optionsManager.setInitialTheme()
     this.mainEl = mainEl
     this.mainEl.innerHTML = ''
     this.conzole = new Conzole(this.mainEl, 'mk-info')
@@ -21,6 +25,8 @@ class MKInfo {
     this.i18n = new I18n(translations, this.lang, 'en')
     this.programs = [
       new OptionsProgram(this.i18n),
+      new AboutProgram(this.i18n),
+      new LinksProgram(this.i18n),
       new EloRapProgram(this.i18n)
     ]
   }
@@ -36,8 +42,7 @@ class MKInfo {
   }
 
   private getLang(): string {
-    const langHashMatch = window.location.hash.match(/lang=(.+)/)
-    return langHashMatch ? langHashMatch[1] : 'en'
+    return optionsManager.setInitialLang()
   }
 
   private async printLogo() {
@@ -82,8 +87,20 @@ class MKInfo {
           await this.conzole.print(result.err)
         }
 
-        if (typeof result.data === 'string') {
-          await this.conzole.print(result.data)
+        if (result.data) {
+          if (typeof result.data === 'string') {
+            await this.conzole.print(result.data)
+          } else {
+            if (result.data.print) {
+              if (result.data.print.type === 'printLazy') {
+                await this.conzole.print(result.data.print.output, true)
+              } else if (result.data.print.type === 'printKeyDescription') {
+                await this.conzole.printKeyDescriptionList(result.data.print.output)
+              } else {
+                await this.conzole.print(result.data.print.output)
+              }
+            }
+          }
         }
       } else {
         await this.conzole.print(this.i18n.key('unknownProgram', mainCommand))

@@ -1,8 +1,13 @@
 import Program from "./Program";
 import I18n from './I18n'
-
+import optionsManager from './OptionsManager'
+import Dialog from './Dialog'
 
 interface ThemesList {
+  [name: string]: string
+}
+
+interface LanguagesList {
   [name: string]: string
 }
 
@@ -17,7 +22,10 @@ class OptionsProgram extends Program {
     dark: 'theme-dark'
   }
 
-  private langs: string[] = ['en', 'pl'] 
+  private langs: LanguagesList = {
+    en: 'en',
+    pl: 'pl'
+  }
 
   constructor(i18n: I18n) {
     super(
@@ -41,13 +49,45 @@ class OptionsProgram extends Program {
         if (this.themes[propsList.theme]) {
           this.changeTheme(propsList.theme)
         } else {
-          return {err:  this.i18n.key('options.unknownThemeError', propsList.theme)}
+          return {
+            err: this.i18n.key(
+              'options.unknownThemeError',
+              [
+                propsList.theme,
+                (() => {
+                  let themesListText: string = ''
+
+                  for (let theme in this.themes) {
+                    themesListText += `${theme} (${this.i18n.key('options.theme.' + theme)}), `
+                  }
+
+                  themesListText = themesListText.replace(/, $/, '')
+
+                  return themesListText
+                })()
+              ]
+            )
+          }
         }
       }
 
-      // if (propsList.lang) {
-      //   return {err: null}
-      // }
+      if (propsList.lang) {
+        if (this.langs[propsList.lang]) {
+          const dialog = new Dialog(
+            this.i18n.key('options.resetToChangeLang'),
+            {
+              buttonNo: this.i18n.key('button.cancel')
+            }
+          )
+
+          const answer = await dialog.open()
+
+          if (answer) {
+            optionsManager.saveLang(this.langs[propsList.lang])
+            window.location.href = window.location.href
+          }
+        }
+      }
     } else {
       return {err: 'You need to provide --theme and/or --lang values.'}
     }
@@ -57,7 +97,8 @@ class OptionsProgram extends Program {
 
   private changeTheme(theme: string): null | string {
     if (this.themes[theme]) {
-      document.body.className = document.body.className.replace(/theme-.+?(\s|$)/, `${this.themes[theme]}$1`)
+      optionsManager.saveTheme(this.themes[theme])
+      optionsManager.saveTheme(this.themes[theme])
       return null
     }
 

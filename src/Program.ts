@@ -11,6 +11,25 @@ interface PropsConfig {
   }
 }
 
+interface DataObject {
+  print?: Print | PrintLazy | PrintKeyDescription
+}
+
+interface Print {
+  type: 'print',
+  output: string | string[]
+}
+
+interface PrintLazy {
+  type: 'printLazy',
+  output: string
+}
+
+interface PrintKeyDescription {
+  type: 'printKeyDescription',
+  output: {key: string, description: string}[]
+}
+
 type PropType = 'string' | 'number' | 'boolean'
 
 type Run = (propsList: PropsList) => Promise<{err: string | null, data?: any}>
@@ -86,7 +105,7 @@ class Program {
     return validationResult
   }
 
-  protected async runCallback(propsList: PropsList): Promise<{err: string | null, data?: any}> {
+  protected async runCallback(propsList: PropsList): Promise<{err: string | null, data?: string | DataObject}> {
     return {err: null}
   }
 
@@ -94,7 +113,7 @@ class Program {
     return this.mainCommand
   }
 
-  async run(propsString: string): Promise<{err: string | null, data?: any}> {
+  async run(propsString: string): Promise<{err: string | null, data?: string | DataObject}> {
     const propsList = this.createPropsFromString(propsString)
     const propsValidationResult = this.validateProps(propsList)
     
