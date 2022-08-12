@@ -1,0 +1,57 @@
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color-overlay);
+
+  &__window {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background: var(--background-color-tertiary);
+    padding: 20px;
+    border: 10px solid var(--border-color-secondary);
+  }
+
+  &__content {
+    &--default {
+      line-height: 1.3;
+    }
+  }
+
+  &__buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    &--multi {
+      justify-content: space-between;
+    }
+  }
+
+  &__button {
+    font-family: var(--font-family);
+    font-size: var(--font-size-main);
+    border-radius: 0;
+    border: none;
+    cursor: pointer;
+    min-width: 100px;
+    padding: 8px 15px;
+    text-transform: uppercase;
+
+    &--no {
+      background: none;
+      border: 2px solid var(--border-color-main);
+      color: var(--text-color-main);
+    }
+
+    &--ok {
+      background-color: var(--background-color-secondary);
+      color: var(--text-color-secondary);
+    }
+  }
+}
