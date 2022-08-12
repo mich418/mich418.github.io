@@ -11,8 +11,40 @@
     "en": "Not sure what you mean by '${0}'",
     "pl": "Nie jestem pewien co to '${0}'"
   },
+  "options.theme.light": {
+    "en": "light theme",
+    "pl": "jasny motyw"
+  },
+  "options.theme.dark": {
+    "en": "dark theme",
+    "pl": "ciemny motyw"
+  },
+  "options.language.polish": {
+    "en": "polish",
+    "pl": "polski"
+  },
+  "options.language.english": {
+    "en": "english",
+    "pl": "angielski"
+  },
   "options.unknownThemeError": {
-    "en": "Unknown theme ${0}",
-    "pl": "Nieznany theme ${0}"
+    "en": "Unknown theme ${0}. Available themes: ${1}.",
+    "pl": "Nieznany motyw ${0}. Dostępne motywy: ${1}."
+  },
+  "options.unknownLangError": {
+    "en": "Unknown language: ${0}. Available languages: ${1}.",
+    "pl": "Nieznany język ${0}. Dostępne języki: ${1}."
+  },
+  "options.resetToChangeLang": {
+    "en": "Application must be reset to apply changes. Click \"OK\" to restart app or \"Cancel\" to cancel.",
+    "pl": "Aplikacja musi zostać zrestartowana, żeby wprowadzić zmiany. Kliknij \"OK\" żeby zresetować aplikację, lub \"anuluj\" żeby anulować."
+  },
+  "button.cancel": {
+    "en": "Cancel",
+    "pl": "Anuluj"
+  },
+  "button.close": {
+    "en": "Close",
+    "pl": "Zamknij"
   }
 }

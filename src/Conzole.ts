@@ -17,6 +17,11 @@ interface lazyPrintOptions {
   pauseMinTime?: number
 }
 
+interface KeyDescription {
+  key: string,
+  description: string
+}
+
 class Conzole {
   private mainElement: HTMLElement
   private classNames: ClassNames
@@ -146,6 +151,24 @@ class Conzole {
     }
 
     this.busy = false
+  }
+
+  async printKeyDescriptionList(keyDescriptionList: KeyDescription[], minSpace: number = 3) {
+    const linesToPrint: string[] = []
+    let longestKeyLength = 0
+
+    for (let keyDescription of keyDescriptionList) {
+      if (keyDescription.key.length > longestKeyLength) {
+        longestKeyLength = keyDescription.key.length
+      }
+    }
+
+    for (let keyDescription of keyDescriptionList) {
+      const space = minSpace + (longestKeyLength - keyDescription.key.length)
+      linesToPrint.push(`${keyDescription.key}${new Array(space).fill('&nbsp;').join('')}${keyDescription.description}`)
+    }
+
+    await this.print(linesToPrint)
   }
 
   private addToHistory(inputText: string) {
