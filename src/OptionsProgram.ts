@@ -1,7 +1,6 @@
-import Program, { DataObject } from "./Program";
+import Program, { DataObject, RunResult } from "./Program";
 import I18n from './I18n'
 import optionsManager from './OptionsManager'
-import Dialog from './Dialog'
 
 interface ThemesList {
   [name: string]: string
@@ -43,7 +42,7 @@ class OptionsProgram extends Program {
     })
   }
 
-  protected async runCallback(propsList: OptionsPropsList): Promise<{err: string | null}> {
+  protected async runCallback(propsList: OptionsPropsList): Promise<RunResult> {
     if (propsList.theme || propsList.lang) {
       
       if (propsList.theme) {
@@ -74,18 +73,20 @@ class OptionsProgram extends Program {
 
       if (propsList.lang) {
         if (this.langs[propsList.lang]) {
-          const dialog = new Dialog(
-            this.i18n.key('options.resetToChangeLang'),
-            {
-              buttonNo: this.i18n.key('button.cancel')
+          optionsManager.saveLang(this.langs[propsList.lang])
+
+          return {
+            question: {
+              text: this.i18n.key('options.resetToChangeLang'),
+              callback: (answer: string) => {
+                if (!answer || answer.toLocaleLowerCase() === 'y' || answer.toLocaleLowerCase() === 't') {
+                  window.location.href = window.location.href
+                  return {}
+                }
+
+                return {}
+              }
             }
-          )
-
-          const answer = await dialog.open()
-
-          if (answer) {
-            optionsManager.saveLang(this.langs[propsList.lang])
-            window.location.href = window.location.href
           }
         }
       }
@@ -98,7 +99,6 @@ class OptionsProgram extends Program {
 
   private changeTheme(theme: string): null | string {
     if (this.themes[theme]) {
-      optionsManager.saveTheme(this.themes[theme])
       optionsManager.saveTheme(this.themes[theme])
       return null
     }

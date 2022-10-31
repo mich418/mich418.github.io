@@ -110,13 +110,13 @@ class Dialog {
   open(): Promise<boolean> {
     document.body.appendChild(this.mainElement)
 
-    
     return new Promise(resolve => {
       let noListener: () => void | undefined;
       let closeListener: () => void | undefined
 
       const okListener = () => {
         this.buttonOk.removeEventListener('click', okListener)
+        document.body.removeEventListener('keyup', escListener)
         
         if (this.buttonNo && noListener !== undefined) {
           this.buttonNo.removeEventListener('click', noListener)
@@ -133,10 +133,19 @@ class Dialog {
 
       this.buttonOk.addEventListener('click', okListener)
 
+      const escListener = (event: KeyboardEvent) => {
+        if (event.key.toLocaleLowerCase() === 'escape') {
+          okListener()
+        }
+      }
+
+      document.body.addEventListener('keyup', escListener)
+
       if (this.config.showClose && this.dialogClose) {
         closeListener = () => {
           this.dialogClose.removeEventListener('click', closeListener)
           this.buttonOk.removeEventListener('click', okListener)
+          document.body.removeEventListener('keyup', escListener)
 
           if (this.buttonNo && noListener !== undefined) {
             this.buttonNo.removeEventListener('click', noListener)
@@ -154,6 +163,7 @@ class Dialog {
         noListener = () => {
           this.buttonNo.removeEventListener('click', noListener)
           this.buttonOk.removeEventListener('click', okListener)
+          document.body.removeEventListener('keyup', escListener)
 
           if (this.dialogClose && closeListener !== undefined) {
             this.dialogClose.removeEventListener('click', closeListener)

@@ -29,7 +29,7 @@ class AboutProgram extends Program {
 
     const text = document.createElement('p')
     text.classList.add(this.classNames.text)
-    text.innerText = 'Some info about me'
+    text.innerText = this.i18n.key('about.text')
 
     mainWrapper.appendChild(image)
     mainWrapper.appendChild(text)

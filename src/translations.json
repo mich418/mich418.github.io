@@ -36,8 +36,8 @@
     "pl": "Nieznany język ${0}. Dostępne języki: ${1}."
   },
   "options.resetToChangeLang": {
-    "en": "Application must be reset to apply changes. Click \"OK\" to restart app or \"Cancel\" to cancel.",
-    "pl": "Aplikacja musi zostać zrestartowana, żeby wprowadzić zmiany. Kliknij \"OK\" żeby zresetować aplikację, lub \"anuluj\" żeby anulować."
+    "en": "To change language, application needs to restart. Do you want to restart now? [Y/n]",
+    "pl": "Aby zmienić język, aplikacja musi uruchomić się ponownie. Czy chcesz zrestartować teraz? [T/n]"
   },
   "button.cancel": {
     "en": "Cancel",
@@ -92,7 +92,7 @@
     "pl": "kod_języka"
   },
   "help.optionsProgram.langOptionDescription": {
-    "en": "changes language (available languages: en (english), pl (polish)",
+    "en": "changes language (available languages: en (english), pl (polish))",
     "pl": "zmienia język (dostępne języki: en (angielski), pl (polski))"
   },
   "help.aboutProgram.description": {
@@ -134,5 +134,9 @@
   "elorap.text1": {
     "en": "Check this out: [link=${0}]${0}[/link]",
     "pl": "Sprawdź to: [link=${0}]${0}[/link]"
+  },
+  "about.text": {
+    "en": "I'm Michal (spelling me-how or mihau), doing some front-end & javascript for fun and money. Walking dog and enjoy good beer in free time. Living in Cracow, Poland.",
+    "pl": "Jestem Michał, robię front-end & javascript dla zabawy i pieniędzy. Spacery z psem i rozkoszowanie się dobrym piwem w czasie wolnym. Kraków, Polska."
   }
 }
