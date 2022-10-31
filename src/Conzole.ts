@@ -72,6 +72,7 @@ class Conzole {
   private createNewInputLine(): HTMLTextAreaElement {
     const line = this.createNewLine()
     const userInput = document.createElement('textarea')
+    userInput.spellcheck = false
 
     line.classList.add(this.classNames.lineUserInput)
     line.classList.add(this.classNames.lineUserInputActive)
@@ -177,15 +178,44 @@ class Conzole {
   }
 
   private addToHistory(inputText: string) {
-    this.history.push(inputText)
+    this.history.unshift(inputText.replace(/\n$/, ''))
   }
 
   private goToPrevInHistory() {
+    if (this.history.length) {
+      if (this.histroyIndex < 0) {
+        this.beforeHistroyInput = this.currentActiveLine.value
+      }
 
+      if (this.histroyIndex + 1 < this.history.length) {
+        this.histroyIndex += 1
+        this.currentActiveLine.value = this.history[this.histroyIndex]
+      } else {
+        this.histroyIndex = -1
+        this.currentActiveLine.value = this.beforeHistroyInput
+      }
+    }
+
+    this.moveCursorAtTheEnd()
   }
 
   private goToNextInHistory() {
-    
+    if (this.histroyIndex > -1) {
+      if (this.histroyIndex === 0) {
+        this.histroyIndex = -1
+        this.currentActiveLine.value = this.beforeHistroyInput
+      } else {
+        this.histroyIndex -= 1
+        this.currentActiveLine.value = this.history[this.histroyIndex]
+      }
+    }
+
+    this.moveCursorAtTheEnd()
+  }
+
+  private moveCursorAtTheEnd() {
+    const valueLength = this.currentActiveLine.value.length
+    this.currentActiveLine.setSelectionRange(valueLength, valueLength)
   }
 
   private resetHistoryActions() {
