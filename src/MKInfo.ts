@@ -10,6 +10,8 @@ import EloRapProgram from './EloRapProgram'
 import HelpProgram from './HelpProgram'
 import CVProgram from './CVProgram'
 import optionsManager from './OptionsManager'
+import { isMobile } from './helpers/helpers'
+import packagejson from '../package.json'
 
 class MKInfo {
   private mainEl: HTMLElement
@@ -55,12 +57,12 @@ class MKInfo {
 
   private async printLogo() {
     const logoLines = logo.split('\n').filter(line => !!line.length)
-    let belowLogoInfo: string | string[] = 'v1.0.0|© 2022 Michal Koczkodon'
+    let belowLogoInfo: string | string[] = `v${packagejson.version}|© 2022 Michal Koczkodon`
     let longestLogoLine = -1
 
     for (let line of logoLines) {
       if (line.length > longestLogoLine) longestLogoLine = line.length
-      await this.conzole.print(line, {pauseMaxTime: 3})
+      await this.conzole.print(line, {pauseMaxTime: 3}, 'logo')
     }
 
     const belowLogoInfoSpaceLength = longestLogoLine - belowLogoInfo.length + 1
@@ -71,12 +73,13 @@ class MKInfo {
       belowLogoInfo.split('|')
     }
 
-    await this.conzole.print(belowLogoInfo)
+    await this.conzole.print(belowLogoInfo, false, 'app-info')
   }
 
   private async printHelloMessage() {
     const helloMessage = [
       this.i18n.key('helloText'),
+      ...(isMobile() ? [this.i18n.key('helloMobileText')] : []),
       this.i18n.key('helloHelpInfo')
     ]
   

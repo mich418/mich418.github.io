@@ -59,10 +59,14 @@ class Conzole {
     this.mainElement.innerHTML = ''
   }
 
-  private createNewLine(): HTMLDivElement {
+  private createNewLine(classModifier?: string): HTMLDivElement {
     const line = document.createElement('div');
 
     line.classList.add(this.classNames.line)
+
+    if (classModifier) {
+      line.classList.add(`${this.classNames.line}--${classModifier}`)
+    }
 
     this.mainElement.appendChild(line)
 
@@ -73,6 +77,7 @@ class Conzole {
     const line = this.createNewLine()
     const userInput = document.createElement('textarea')
     userInput.spellcheck = false
+    userInput.autocapitalize = 'off'
 
     line.classList.add(this.classNames.lineUserInput)
     line.classList.add(this.classNames.lineUserInputActive)
@@ -128,11 +133,11 @@ class Conzole {
     }
   }
 
-  async print(output: string | string[], lazy: boolean | lazyPrintOptions = false) {
+  async print(output: string | string[], lazy: boolean | lazyPrintOptions = false, classModifier?: string) {
     if (this.busy) throw(new Error('Conzole is busy right now'))
 
     this.busy = true
-    const line = this.createNewLine()
+    const line = this.createNewLine(classModifier)
     const linesToPrint = typeof output === 'string' ? [output] : [...output]
 
     for (let lineToPrint of linesToPrint) {
