@@ -1,0 +1,14 @@
+.about {
+  width: 100%;
+
+  &__image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &__text {
+    margin: 20px 0 0 0;
+  }
+}

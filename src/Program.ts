@@ -4,6 +4,13 @@ interface PropsList {
   [prop: string]: string | number | boolean
 }
 
+interface ProgramConfig {
+  mainCommand: string,
+  description?: string,
+  hidden?: boolean,
+  i18n: I18n,
+  propsConfig?: PropsConfig
+}
 interface PropsConfig {
   [prop: string]: {
     type:  PropType,
@@ -12,7 +19,7 @@ interface PropsConfig {
 }
 
 interface DataObject {
-  print?: Print | PrintLazy | PrintKeyDescription
+  print?: Print | PrintLazy | PrintKeyDescription | (Print | PrintLazy | PrintKeyDescription)[]
 }
 
 interface Print {
@@ -32,17 +39,32 @@ interface PrintKeyDescription {
 
 type PropType = 'string' | 'number' | 'boolean'
 
-type Run = (propsList: PropsList) => Promise<{err: string | null, data?: any}>
+type Run = (propsString: string) => Promise<RunResult>
+
+type RunCallback = (propsList: PropsList) => Promise<RunResult>
+
+type RunResult = {
+  err?: string,
+  data?: DataObject,
+  question?: {
+    text: string
+    callback: (input: string) => RunResult
+  }
+}
 
 class Program {
-  private mainCommand: string
+  protected mainCommand: string
+  protected description: string
+  protected hidden: boolean = false
   protected i18n: I18n
   private propsConfig: PropsConfig
 
-  constructor(mainCommand: string, i18n: I18n,  propsConfig?: PropsConfig) {
-    this.mainCommand = mainCommand
-    this.i18n = i18n
-    this.propsConfig = propsConfig || {}
+  constructor(config: ProgramConfig) {
+    this.mainCommand = config.mainCommand
+    this.i18n = config.i18n
+    this.description = config.description || 'some program, not sure what it\'s doing...'
+    this.hidden = config.hidden || !config.description
+    this.propsConfig = config.propsConfig || {}
   }
 
   private createPropsFromString(propsString: string): PropsList {
@@ -105,7 +127,7 @@ class Program {
     return validationResult
   }
 
-  protected async runCallback(propsList: PropsList): Promise<{err: string | null, data?: string | DataObject}> {
+  protected async runCallback(propsList: PropsList): Promise<RunResult> {
     return {err: null}
   }
 
@@ -113,7 +135,24 @@ class Program {
     return this.mainCommand
   }
 
-  async run(propsString: string): Promise<{err: string | null, data?: string | DataObject}> {
+  isHidden(): boolean {
+    return this.hidden
+  }
+
+  getDescription(): string {
+    return this.description
+  }
+
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.forgotAboutIt')
+      }
+    }
+  }
+
+  async run(propsString: string): Promise<RunResult> {
     const propsList = this.createPropsFromString(propsString)
     const propsValidationResult = this.validateProps(propsList)
     
@@ -129,5 +168,9 @@ export default Program
 
 export {
   PropsList,
+  ProgramConfig,
+  DataObject,
+  RunResult,
+  RunCallback,
   Run
 }

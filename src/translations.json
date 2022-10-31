@@ -8,8 +8,8 @@
     "pl": "Wprowadź komendę 'help' żeby zobaczyć co możesz zrobić."
   },
   "unknownProgram": {
-    "en": "Not sure what you mean by '${0}'",
-    "pl": "Nie jestem pewien co to '${0}'"
+    "en": "Not sure what you mean by '${0}'. Type in 'help' to see the list of available commands.",
+    "pl": "Nie jestem pewien co to '${0}'. Wprowadź komendę 'help' aby zobaczyć dostępne komendy."
   },
   "options.theme.light": {
     "en": "light theme",
@@ -46,5 +46,93 @@
   "button.close": {
     "en": "Close",
     "pl": "Zamknij"
+  },
+  "help.list.commandHeader": {
+    "en": "Command",
+    "pl": "Komenda"
+  },
+  "help.list.descriptionHeader": {
+    "en": "Description",
+    "pl": "Opis"
+  },
+  "help.additionalInfro": {
+    "en": "Type 'help --command [commandName]' to get more info",
+    "pl": "Wprowadź komendę 'help --command [nazwaKomendy]' aby dowiedzieć się więcej."
+  },
+  "help.commandDoNotExist": {
+    "en": "Unfortunately, command '${0}' doesn't exist.",
+    "pl": "Niestety, komenda '${0}' nie istnieje."
+  },
+  "help.forgotAboutIt": {
+    "en": "Upps.. looks like someone forgot to add help for it...",
+    "pl": "Oho... chyba ktoś zapomniał dodać pomoc dla tej komendy..."
+  },
+  "help.helpProgramDescription": {
+    "en": "Helps.",
+    "pl": "Pomaga."
+  },
+  "help.optionsProgram.description": {
+    "en": "set some options",
+    "pl": "ustawia niektóre opcje"
+  },
+  "help.optionsProgram.title": {
+    "en": "${0} usage",
+    "pl": "użycie ${0}"
+  },
+  "help.optionsProgram.themeName": {
+    "en": "theme_name",
+    "pl": "nazwa_motywu"
+  },
+  "help.optionsProgram.themeOptionDescription": {
+    "en": "changes theme (available themes: light, dark)",
+    "pl": "zmienia motyw (dostępne motywy: light (jasny), dark (ciemny))"
+  },
+  "help.optionsProgram.languageCode": {
+    "en": "lang_code",
+    "pl": "kod_języka"
+  },
+  "help.optionsProgram.langOptionDescription": {
+    "en": "changes language (available languages: en (english), pl (polish)",
+    "pl": "zmienia język (dostępne języki: en (angielski), pl (polski))"
+  },
+  "help.aboutProgram.description": {
+    "en": "shows popup with some bio about me",
+    "pl": "pokazuje okienko z informacjami o mnie"
+  },
+  "help.aboutProgram.detailedDescription": {
+    "en": "Just type in 'about' and you will get some info about this page author.",
+    "pl": "Po prostu wprowadź komendę 'about' a dostaniesz info o autorze tej strony."
+  },
+  "help.linksProgram.description": {
+    "en": "prints list of links to my social media",
+    "pl": "wyświetla listę linków do moich mediów społecznościowych"
+  },
+  "help.linksProgram.detailedDescription": {
+    "en": "Just type in 'links' and you will get some social media links.",
+    "pl": "Po prostu wprowadź komendę 'links' a dostaniesz kilka linków do social mediów."
+  },
+  "help.elorapProgram.detailedDescription": {
+    "en": "Rap, dammit!",
+    "pl": "Rapsy, kurde blacha!"
+  },
+  "help.cvProgram.description": {
+    "en": "download my CV",
+    "pl": "pobierz moje CV"
+  },
+  "help.cvProgram.detailedDescription": {
+    "en": "Just type in 'cv' to download my CV.",
+    "pl": "Po prostu wprowadź komendę 'cv' aby pobrać moje CV"
+  },
+  "help.cvProgram.downloadInfo": {
+    "en": "Document you're going to download doesn't contain contact info such as phone number and email address. If you want to get in touch, please try on [link=https://www.linkedin.com/in/mihauco/]linkedin[/link]. Please be aware that if you're recruiter and you will send me an offer that I will not be interested in then I will not answer you back.",
+    "pl": "Dokument, który zaraz pobierzesz, nie zawiera informacji takich jak numer telefonu czy adres email. Jeżeli chcesz sie ze mną skontaktować, spróbuj przez [link=https://www.linkedin.com/in/mihauco/]linkedin[/link]. Bądź proszę świadom/świadoma, że jeżeli jesteś rekruterem/rekruterką, i wyślesz mi ofertę, którą nie jestem zainteresowany, po prostu Ci nie odpowiem."
+  },
+  "help.cvProgram.downloadProceed": {
+    "en": "PRESS ENTER TO PROCEED",
+    "pl": "NACIŚNIJ ENTER ABY KONTUNUOWAĆ"
+  },
+  "elorap.text1": {
+    "en": "Check this out: [link=${0}]${0}[/link]",
+    "pl": "Sprawdź to: [link=${0}]${0}[/link]"
   }
 }

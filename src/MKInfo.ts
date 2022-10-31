@@ -7,6 +7,8 @@ import OptionsProgram from './OptionsProgram'
 import AboutProgram from './AboutProgram'
 import LinksProgram from './LinksProgram'
 import EloRapProgram from './EloRapProgram'
+import HelpProgram from './HelpProgram'
+import CVProgram from './CVProgram'
 import optionsManager from './OptionsManager'
 
 class MKInfo {
@@ -27,8 +29,13 @@ class MKInfo {
       new OptionsProgram(this.i18n),
       new AboutProgram(this.i18n),
       new LinksProgram(this.i18n),
-      new EloRapProgram(this.i18n)
+      new EloRapProgram(this.i18n),
+      new CVProgram(this.i18n)
     ]
+    
+    this.programs.push(
+      new HelpProgram(this.i18n, this.programs)
+    )
   }
 
   async start() {
@@ -37,6 +44,7 @@ class MKInfo {
     await this.printHelloMessage()
 
     this.bindInputEvents()
+    this.bindAutoFocusToActiveLineEvent()
 
     this.conzole.input()
   }
@@ -52,7 +60,7 @@ class MKInfo {
 
     for (let line of logoLines) {
       if (line.length > longestLogoLine) longestLogoLine = line.length
-      await this.conzole.print(line, {pauseMaxTime: 5})
+      await this.conzole.print(line, {pauseMaxTime: 3})
     }
 
     const belowLogoInfoSpaceLength = longestLogoLine - belowLogoInfo.length + 1
@@ -81,32 +89,58 @@ class MKInfo {
       const programToRun = this.programs.find(program => program.getMainCommand() === mainCommand)
 
       if (programToRun) {
-        const result = await programToRun.run(inputText.replace(/^.+?(\s|$)/, ''))
-        
-        if (result.err) {
-          await this.conzole.print(result.err)
-        }
-
-        if (result.data) {
-          if (typeof result.data === 'string') {
-            await this.conzole.print(result.data)
-          } else {
-            if (result.data.print) {
-              if (result.data.print.type === 'printLazy') {
-                await this.conzole.print(result.data.print.output, true)
-              } else if (result.data.print.type === 'printKeyDescription') {
-                await this.conzole.printKeyDescriptionList(result.data.print.output)
-              } else {
-                await this.conzole.print(result.data.print.output)
-              }
-            }
-          }
-        }
+        await this.runProgram(programToRun, inputText)
       } else {
         await this.conzole.print(this.i18n.key('unknownProgram', mainCommand))
       }
 
       this.conzole.input()
+    })
+  }
+
+  private async runProgram(program: Program, input: string) {
+    let run = true
+    let result = await program.run(input.replace(/^.+?(\s|$)/, ''))
+    
+    while (run) {
+      if (!result.question) {
+        run = false
+      }
+
+      if (result.err) {
+        await this.conzole.print(result.err)
+      }
+  
+      if (result.data) {
+        if (typeof result.data === 'string') {
+          await this.conzole.print(result.data)
+        } else {
+          if (result.data.print) {
+            const printDataArray = Array.isArray(result.data.print) ? result.data.print : [result.data.print]
+  
+            for (const printData of printDataArray) {
+              if (printData.type === 'printLazy') {
+                await this.conzole.print(printData.output, true)
+              } else if (printData.type === 'printKeyDescription') {
+                await this.conzole.printKeyDescriptionList(printData.output)
+              } else {
+                await this.conzole.print(printData.output)
+              }
+            }
+          }
+        }
+      }
+
+      if (result.question) {
+        const response = await this.conzole.question(result.question.text)
+        result = result.question.callback(response)
+      }
+    }
+  }
+
+  bindAutoFocusToActiveLineEvent() {
+    document.body.addEventListener('click', () => {
+      this.conzole.focus()
     })
   }
 }
