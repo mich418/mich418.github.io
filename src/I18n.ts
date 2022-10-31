@@ -42,7 +42,7 @@ class I18n {
           }
 
           for (let key in replacementsObject) {
-            translation = translation.replace('${' + key + '}', replacementsObject[key])
+            translation = translation.replaceAll('${' + key + '}', replacementsObject[key])
           }
         }
 

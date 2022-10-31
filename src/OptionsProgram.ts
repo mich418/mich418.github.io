@@ -1,4 +1,4 @@
-import Program from "./Program";
+import Program, { DataObject } from "./Program";
 import I18n from './I18n'
 import optionsManager from './OptionsManager'
 import Dialog from './Dialog'
@@ -28,10 +28,11 @@ class OptionsProgram extends Program {
   }
 
   constructor(i18n: I18n) {
-    super(
-      'options',
+    super({
+      mainCommand: 'options',
+      description: i18n.key('help.optionsProgram.description'),
       i18n,
-      {
+      propsConfig: {
         theme: {
           type: 'string'
         },
@@ -39,7 +40,7 @@ class OptionsProgram extends Program {
           type: 'string'
         }
       }
-    )
+    })
   }
 
   protected async runCallback(propsList: OptionsPropsList): Promise<{err: string | null}> {
@@ -107,6 +108,24 @@ class OptionsProgram extends Program {
 
   private changeLang(theme: string): null | string {
     return null
+  }
+
+  help(): DataObject {
+    return {
+      print: [
+        {type: 'print', output: this.i18n.key('help.optionsProgram.title', this.mainCommand)},
+        {type: 'printKeyDescription', output: [
+          {
+            key: `${this.mainCommand} --theme [${this.i18n.key('help.optionsProgram.themeName')}]`,
+            description: this.i18n.key('help.optionsProgram.themeOptionDescription')
+          },
+          {
+            key: `${this.mainCommand} --lang [${this.i18n.key('help.optionsProgram.languageCode')}]`,
+            description: this.i18n.key('help.optionsProgram.langOptionDescription')
+          }
+        ]}
+      ]
+    }
   }
 }
 

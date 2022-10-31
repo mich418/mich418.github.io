@@ -3,11 +3,13 @@ import {sleep} from './helpers'
 interface ClassNames {
   main: string,
   line: string,
+  lineWithQuestion: string,
   lineUserInput: string,
   lineUserInputActive: string,
   userInput: string,
   subline: string,
-  link: string
+  link: string,
+  question: string
 }
 
 type inputHandler = (inputText: string) => void
@@ -30,6 +32,7 @@ class Conzole {
   private history: string[] = []
   private histroyIndex: number = -1
   private beforeHistroyInput: string = ''
+  private currentActiveLine: HTMLTextAreaElement | null = null
 
   constructor(el: HTMLElement, namespace: string = 'conzole') {
     this.mainElement = el
@@ -41,11 +44,13 @@ class Conzole {
     this.classNames = {
       main: `${namespace}`,
       line: `${namespace}__line`,
+      lineWithQuestion: `${namespace}__line--with-question`,
       lineUserInput: `${namespace}__line--user-input`,
       lineUserInputActive: `${namespace}__line--user-input-active`,
       userInput: `${namespace}__user-input`,
       subline: `${namespace}__subline`,
-      link: `${namespace}__link`
+      link: `${namespace}__link`,
+      question: `${namespace}__question`
     }
   }
 
@@ -189,19 +194,19 @@ class Conzole {
   }
 
   async input() {
-    const line = this.createNewInputLine()
+    this.currentActiveLine = this.createNewInputLine()
 
     const keyUpListener = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
-        const inputText = line.value
+        const inputText = this.currentActiveLine.value
         const subline = this.createNewSublineElement()
 
-        line.parentElement.classList.remove(this.classNames.lineUserInputActive)
+        this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
         subline.innerText = inputText
-        line.parentElement.appendChild(subline)
+        this.currentActiveLine.parentElement.appendChild(subline)
     
-        line.removeEventListener('keyup', keyUpListener)
-        line.remove()
+        this.currentActiveLine.removeEventListener('keyup', keyUpListener)
+        this.currentActiveLine.remove()
 
         this.addToHistory(inputText)
         this.resetHistoryActions()
@@ -212,16 +217,57 @@ class Conzole {
           this.input()
         }
       } else if (event.key === 'ArrowUp') {
-        
+        this.goToPrevInHistory()
       } else if (event.key === 'ArrowDown') {
-        
+        this.goToNextInHistory()
       } else {
         this.histroyIndex === -1
       }
     }
 
-    line.addEventListener('keyup', keyUpListener)
-    line.focus()
+    this.currentActiveLine.addEventListener('keyup', keyUpListener)
+    this.currentActiveLine.focus()
+  }
+
+  question(question: string): Promise<string> {
+    const questionLine = `${question}: `
+    this.currentActiveLine = this.createNewInputLine()
+    this.currentActiveLine.value = questionLine
+
+    return new Promise((resolve) => {
+      const inputListener = (event: InputEvent) => {
+        if (this.currentActiveLine.value.length < questionLine.length) {
+          this.currentActiveLine.value = questionLine
+        }
+      }
+
+      const keyUpListener = (event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          const inputText = this.currentActiveLine.value
+          const subline = this.createNewSublineElement()
+  
+          this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
+          subline.innerText = inputText
+          this.currentActiveLine.parentElement.appendChild(subline)
+      
+          this.currentActiveLine.removeEventListener('keyup', keyUpListener)
+          this.currentActiveLine.removeEventListener('input', inputListener)
+          this.currentActiveLine.remove()
+  
+          resolve(inputText.replace(questionLine, '').trim())
+        }
+      }
+
+      this.currentActiveLine.addEventListener('keyup', keyUpListener)
+      this.currentActiveLine.addEventListener('input', inputListener)
+      this.currentActiveLine.focus()
+    })
+  }
+
+  focus() {
+    if (this.currentActiveLine) {
+      this.currentActiveLine.focus()
+    }
   }
 
   onInput(callback: inputHandler) {
