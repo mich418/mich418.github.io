@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://mihauco.github.io",
   "scripts": {
-    "start": "npm run build && http-server ./dist",
     "dev": "webpack serve --open",
-    "build": "webpack --env=prod"
+    "build": "webpack --env=prod",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "http-server": "^14.1.1"
+    "gh-pages": "^4.0.0"
   }
 }
