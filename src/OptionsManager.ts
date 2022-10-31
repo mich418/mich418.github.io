@@ -12,7 +12,8 @@ const optionsManager = {
     localStorage.setItem('lang', lang)
   },
   saveTheme(themeClass: string) {
-    localStorage.setItem('themeClass', themeClass)    
+    localStorage.setItem('themeClass', themeClass)   
+    this.setTheme(themeClass) 
   },
   setTheme(themeClass: string) {
     const body = document.body
