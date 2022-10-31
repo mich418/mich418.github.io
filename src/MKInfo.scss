@@ -1,7 +1,13 @@
+@use "./helpers/helpers.scss";
+
 $namespace: 'mk-info';
 
 .#{$namespace} {
   padding: 30px 30px 30px 30px;
+
+  @include helpers.mediaRuleMixin {
+    padding: 20px 10px;
+  }
 
   &__line {
     padding-left: 15px;
@@ -21,6 +27,19 @@ $namespace: 'mk-info';
     &--user-input-active {
       &::before {
         animation: blink .7s infinite;
+      }
+    }
+
+    &--logo,
+    &--app-info {
+      @include helpers.mediaRuleMixin {
+        font-size: 9px;
+        min-height: 14px;
+        line-height: 14px;
+        width: 315px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
       }
     }
   }

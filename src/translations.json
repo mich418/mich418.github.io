@@ -3,6 +3,10 @@
     "en": "Hello! I'm Michal, and that's[100].[100].[100].[500] my website.",
     "pl": "Cześć! Jestem Michał, a to[100].[100].[100].[500] moja strona."
   },
+  "helloMobileText": {
+    "en": "Experience on small/mobile screens could be not as good as on desktop devices, still working on improvements.",
+    "pl": "Użytkowanie na małych ekranach / urządzeniach mobilnych może nie być tak dobre jak na komputerach, ciągle pracuję nad usprawnieniami."
+  },
   "helloHelpInfo": {
     "en": "Type in 'help' command to see what you can do here.",
     "pl": "Wprowadź komendę 'help' żeby zobaczyć co możesz zrobić."
