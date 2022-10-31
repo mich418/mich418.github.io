@@ -1,28 +1,41 @@
-import Program from "./Program";
+import Program, {DataObject} from './Program'
 import I18n from './I18n'
 
 class LinksProgram extends Program {
   constructor(i18n: I18n) {
-    super('links', i18n)
+    super({
+      mainCommand: 'links',
+      description: i18n.key('help.linksProgram.description'),
+      i18n
+    })
   }
 
-  protected async runCallback(): Promise<{ err: string; data?: any; }> {
+  protected async runCallback(): Promise<{ err: string | null, data?: any; }> {
     const links = [
       {
         key: 'linkedin:',
-        description: '[link=https://www.linkedin.com/in/michalkoczkodon/]https://www.linkedin.com/in/michalkoczkodon/[/link]'
+        description: '[link=https://www.linkedin.com/in/mihauco]linkedin.com/in/mihauco[/link]'
       },
       {
         key: 'twitter:',
-        description: '[link=https://twitter.com/MichalKoczkodon]https://twitter.com/MichalKoczkodon[/link]'
+        description: '[link=https://twitter.com/mihauco]twitter.com/mihauco[/link]'
       },
       {
         key: 'github:',
-        description: '[link=https://github.com/noiff]https://github.com/noiff[/link]'
+        description: '[link=https://github.com/mihauco]github.com/mihauco[/link]'
       }
     ]
 
     return {err: null, data: {print: {type: 'printKeyDescription', output: links}}}
+  }
+
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.linksProgram.detailedDescription')
+      }
+    }
   }
 }
 
