@@ -35,6 +35,6 @@ It's nothing special, I just created it to learn more / play with changelog form
 - app with all basic functionalities
 - gh-pages to deploy project as github page
 
-[1.1.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.1.0...v1.2.0
+[1.2.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/mihauco/mihauco.github.io/releases/tag/v1.0.0
