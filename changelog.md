@@ -13,6 +13,10 @@ It's nothing special, I just created it to learn more / play with changelog form
 - clean dist folder on dev and prod build
 - auto generate CNAME for github pages on predeploy
 
+### Fixed
+
+- npm vulnerabilities
+
 ## [1.1.0] - 2022-10-31
 
 ### Added
