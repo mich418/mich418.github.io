@@ -16,6 +16,15 @@ class EloRapProgram extends Program {
     })
   }
 
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.elorapProgram.detailedDescription')
+      }
+    }
+  }
+
   protected async runCallback(): Promise<RunResult> {
     const randomIndex = Math.round(Math.random() * (this.rapList.length - 1))
 
@@ -25,15 +34,6 @@ class EloRapProgram extends Program {
           type: 'print',
           output: this.i18n.key('elorap.text1', this.rapList[randomIndex])
         }
-      }
-    }
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.elorapProgram.detailedDescription')
       }
     }
   }

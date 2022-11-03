@@ -1,9 +1,9 @@
 @use "./helpers/helpers.scss";
 
-$namespace: 'mk-info';
+$namespace: "mk-info";
 
 .#{$namespace} {
-  padding: 30px 30px 30px 30px;
+  padding: 30px;
 
   @include helpers.mediaRuleMixin {
     padding: 20px 10px;
@@ -17,7 +17,7 @@ $namespace: 'mk-info';
 
     &--user-input {
       &::before {
-        content: '>';
+        content: ">";
         position: absolute;
         top: 0;
         left: 0;
@@ -26,7 +26,7 @@ $namespace: 'mk-info';
 
     &--user-input-active {
       &::before {
-        animation: blink .7s infinite;
+        animation: blink 0.7s infinite;
       }
     }
 
@@ -96,7 +96,7 @@ $namespace: 'mk-info';
 
     &:hover,
     &:visited {
-      color: inherit
+      color: inherit;
     }
 
     &:hover {

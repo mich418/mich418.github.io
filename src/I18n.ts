@@ -32,16 +32,16 @@ class I18n {
           if (typeof replacements === 'string') {
             replacementsObject['0'] = replacements
           } else if (Array.isArray(replacements)) {
-            for (let index in replacements) {
+            for (const index in replacements) {
               replacementsObject[`${index}`] = replacements[index]
             }
           } else if (typeof replacements === 'object') {
-            for (let key in replacements) {
+            for (const key in replacements) {
               replacementsObject[`${key}`] = replacements[key]
             }
           }
 
-          for (let key in replacementsObject) {
+          for (const key in replacementsObject) {
             translation = translation.replaceAll('${' + key + '}', replacementsObject[key])
           }
         }

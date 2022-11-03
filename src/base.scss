@@ -1,14 +1,14 @@
 :root {
   --font-family: monospace;
   --font-size-main: 14px;
-  --mobile-break-point: 600px
+  --mobile-break-point: 600px;
 }
 
 body.theme-dark {
   --background-color-main: #303b47;
   --background-color-secondary: #eaf4ff;
   --background-color-tertiary: #5b6f86;
-  --background-color-overlay: rgba(0, 0, 0, .7);
+  --background-color-overlay: rgb(0 0 0 / 70%);
   --text-color-main: #eaf4ff;
   --text-color-secondary: #303b47;
   --border-color-main: #eaf4ff;
@@ -19,7 +19,7 @@ body.theme-light {
   --background-color-main: #eaf4ff;
   --background-color-secondary: #303b47;
   --background-color-tertiary: #f3f5f7;
-  --background-color-overlay: rgba(255, 255, 255, .8);
+  --background-color-overlay: rgb(255 255 255 / 80%);
   --text-color-main: #303b47;
   --text-color-secondary: #eaf4ff;
   --border-color-main: #303b47;
