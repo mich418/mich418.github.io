@@ -1,4 +1,4 @@
-import Program, { DataObject } from "./Program";
+import Program, { DataObject, RunResult } from "./Program";
 import I18n from './I18n'
 import Dialog from './Dialog'
 import mkInfoImg from './assets/mk_info_img.jpeg'
@@ -19,6 +19,28 @@ class AboutProgram extends Program {
     })
   }
 
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.aboutProgram.detailedDescription')
+      }
+    }
+  }
+
+  protected async runCallback(): Promise<RunResult> {
+    const dialog = new Dialog(
+      this.getContent(),
+      {
+        name: 'About',
+        width: 600,
+        buttonOk: this.i18n.key('button.close')
+      }
+    )
+    await dialog.open()
+    return {err: null}
+  }
+
   private getContent(): HTMLDivElement {
     const mainWrapper = document.createElement('div')
     mainWrapper.classList.add(this.classNames.main)
@@ -35,28 +57,6 @@ class AboutProgram extends Program {
     mainWrapper.appendChild(text)
 
     return mainWrapper
-  }
-
-  protected async runCallback(): Promise<{ err: string; data?: any; }> {
-    const dialog = new Dialog(
-      this.getContent(),
-      {
-        name: 'About',
-        width: 600,
-        buttonOk: this.i18n.key('button.close')
-      }
-    )
-    await dialog.open()
-    return {err: null}
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.aboutProgram.detailedDescription')
-      }
-    }
   }
 }
 

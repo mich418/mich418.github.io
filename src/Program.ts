@@ -55,7 +55,7 @@ type RunResult = {
 class Program {
   protected mainCommand: string
   protected description: string
-  protected hidden: boolean = false
+  protected hidden = false
   protected i18n: I18n
   private propsConfig: PropsConfig
 
@@ -65,6 +65,44 @@ class Program {
     this.description = config.description || 'some program, not sure what it\'s doing...'
     this.hidden = config.hidden || !config.description
     this.propsConfig = config.propsConfig || {}
+  }
+
+  getMainCommand(): string {
+    return this.mainCommand
+  }
+
+  isHidden(): boolean {
+    return this.hidden
+  }
+
+  getDescription(): string {
+    return this.description
+  }
+
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.forgotAboutIt')
+      }
+    }
+  }
+
+  
+
+  async run(propsString: string): Promise<RunResult> {
+    const propsList = this.createPropsFromString(propsString)
+    const propsValidationResult = this.validateProps(propsList)
+    
+    if (propsValidationResult) {
+      return {err: propsValidationResult}
+    }
+
+    return await this.runCallback(propsList)
+  }
+
+  protected async runCallback(propsList: PropsList): Promise<RunResult> {
+    return {err: null, data: {print: {type: 'print', output: `Provided props?: ${!!propsList}`}}}
   }
 
   private createPropsFromString(propsString: string): PropsList {
@@ -97,7 +135,7 @@ class Program {
 
             if (currentArgSubArray[1] === 'false' || currentArgSubArray[1] === 'true') {
               propsList[currentArgSubArray[0]] = currentArgSubArray[1] === 'false' ? false : true
-            } else if ((numberValue = Number(currentArgSubArray[1])) && numberValue !== NaN) {
+            } else if ((numberValue = Number(currentArgSubArray[1])) && !isNaN(numberValue)) {
               propsList[currentArgSubArray[0]] = numberValue
             } else {
               propsList[currentArgSubArray[0]] = currentArgSubArray[1]
@@ -112,7 +150,7 @@ class Program {
   private validateProps(propsList: PropsList): string | null {
     let validationResult: string | null = null
 
-    for (let prop in propsList) {
+    for (const prop in propsList) {
       if (!this.propsConfig[prop]) {
         validationResult = `Unknown property '${prop}'`
         break
@@ -125,42 +163,6 @@ class Program {
     }
     
     return validationResult
-  }
-
-  protected async runCallback(propsList: PropsList): Promise<RunResult> {
-    return {err: null}
-  }
-
-  getMainCommand(): string {
-    return this.mainCommand
-  }
-
-  isHidden(): boolean {
-    return this.hidden
-  }
-
-  getDescription(): string {
-    return this.description
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.forgotAboutIt')
-      }
-    }
-  }
-
-  async run(propsString: string): Promise<RunResult> {
-    const propsList = this.createPropsFromString(propsString)
-    const propsValidationResult = this.validateProps(propsList)
-    
-    if (propsValidationResult) {
-      return {err: propsValidationResult}
-    }
-
-    return await this.runCallback(propsList)
   }
 }
 

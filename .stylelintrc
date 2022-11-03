@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "scss/at-mixin-pattern": "[a-zA-Z0-9]"
+  }
+}

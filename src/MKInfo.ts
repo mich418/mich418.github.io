@@ -9,6 +9,8 @@ import LinksProgram from './LinksProgram'
 import EloRapProgram from './EloRapProgram'
 import HelpProgram from './HelpProgram'
 import CVProgram from './CVProgram'
+import ChangeLogProgram from './ChangeLogProgram'
+import RepoProgram from './RepoProgram'
 import optionsManager from './OptionsManager'
 import { isMobile } from './helpers/helpers'
 import packagejson from '../package.json'
@@ -32,7 +34,9 @@ class MKInfo {
       new AboutProgram(this.i18n),
       new LinksProgram(this.i18n),
       new EloRapProgram(this.i18n),
-      new CVProgram(this.i18n)
+      new CVProgram(this.i18n),
+      new ChangeLogProgram(this.i18n),
+      new RepoProgram(this.i18n)
     ]
     
     this.programs.push(
@@ -51,6 +55,12 @@ class MKInfo {
     this.conzole.input()
   }
 
+  bindAutoFocusToActiveLineEvent() {
+    document.body.addEventListener('click', () => {
+      this.conzole.focus()
+    })
+  }
+
   private getLang(): string {
     return optionsManager.setInitialLang()
   }
@@ -60,10 +70,11 @@ class MKInfo {
     let belowLogoInfo: string | string[] = `v${packagejson.version}|© 2022 Michal Koczkodon`
     let longestLogoLine = -1
 
-    for (let line of logoLines) {
+    for (const line of logoLines) {
       if (line.length > longestLogoLine) longestLogoLine = line.length
-      await this.conzole.print(line, {pauseMaxTime: 3}, 'logo')
     }
+
+    await this.conzole.print(logoLines, {pauseMaxTime: 3}, 'logo')
 
     const belowLogoInfoSpaceLength = longestLogoLine - belowLogoInfo.length + 1
 
@@ -139,12 +150,6 @@ class MKInfo {
         result = result.question.callback(response)
       }
     }
-  }
-
-  bindAutoFocusToActiveLineEvent() {
-    document.body.addEventListener('click', () => {
-      this.conzole.focus()
-    })
   }
 }
 
