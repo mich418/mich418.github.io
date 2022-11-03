@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {},
+  "globals": {},
+  "rules": {
+    "@typescript-eslint/member-ordering": "error"
+  },
+  "ignorePatterns": ["cleanDist.js", "generateCNAME.js", "webpack.config.js", ".eslintrc.js"]
+}

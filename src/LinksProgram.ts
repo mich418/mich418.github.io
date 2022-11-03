@@ -1,4 +1,4 @@
-import Program, {DataObject} from './Program'
+import Program, {DataObject, RunResult} from './Program'
 import I18n from './I18n'
 
 class LinksProgram extends Program {
@@ -10,7 +10,16 @@ class LinksProgram extends Program {
     })
   }
 
-  protected async runCallback(): Promise<{ err: string | null, data?: any; }> {
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.linksProgram.detailedDescription')
+      }
+    }
+  }
+
+  protected async runCallback(): Promise<RunResult> {
     const links = [
       {
         key: 'linkedin:',
@@ -27,15 +36,6 @@ class LinksProgram extends Program {
     ]
 
     return {err: null, data: {print: {type: 'printKeyDescription', output: links}}}
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.linksProgram.detailedDescription')
-      }
-    }
   }
 }
 

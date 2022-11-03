@@ -18,6 +18,15 @@ class HelpProgram extends Program {
     this.programInstances = programInstances
   }
 
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.helpProgramDescription')
+      }
+    }
+  }
+
   protected async runCallback(propsList: PropsList): Promise<RunResult> {
     if (propsList.command && typeof propsList.command === 'string') {
       const commandHelpPrintData = this.getCommandHelpPrintData(propsList.command)
@@ -69,15 +78,6 @@ class HelpProgram extends Program {
     }
 
     return {print: {type: 'print', output: this.i18n.key('help.commandDoNotExist', commandName)}}
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.helpProgramDescription')
-      }
-    }
   }
 }
 

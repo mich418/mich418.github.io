@@ -11,6 +11,15 @@ class CVProgram extends Program {
     })
   }
 
+  help(): DataObject {
+    return {
+      print: {
+        type: 'print',
+        output: this.i18n.key('help.cvProgram.detailedDescription')
+      }
+    }
+  }
+
   protected async runCallback(): Promise<RunResult> {
     return {
       data: {
@@ -42,15 +51,6 @@ class CVProgram extends Program {
     setTimeout(() => {
       link.remove()
     }, 100)
-  }
-
-  help(): DataObject {
-    return {
-      print: {
-        type: 'print',
-        output: this.i18n.key('help.cvProgram.detailedDescription')
-      }
-    }
   }
 }
 

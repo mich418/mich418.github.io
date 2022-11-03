@@ -43,6 +43,10 @@
     "en": "To change language, application needs to restart. Do you want to restart now? [Y/n]",
     "pl": "Aby zmienić język, aplikacja musi uruchomić się ponownie. Czy chcesz zrestartować teraz? [T/n]"
   },
+  "options.noPropsError": {
+    "en": "You need to provide --theme and/or --lang values.",
+    "pl": "Musisz podać wartość dla parametrów --theme i/lub --lang."
+  },
   "button.cancel": {
     "en": "Cancel",
     "pl": "Anuluj"
@@ -142,5 +146,25 @@
   "about.text": {
     "en": "I'm Michal (spelling me-how or mihau), doing some front-end & javascript for fun and money. Walking dog and enjoying good beer in free time. Living in Cracow, Poland.",
     "pl": "Jestem Michał, robię front-end & javascript dla zabawy i pieniędzy. Spacery z psem i rozkoszowanie się dobrym piwem w czasie wolnym. Kraków, Polska."
+  },
+  "help.changelog.description": {
+    "en": "prints out changelog",
+    "pl": "pokazuje listę zmian (w języku angielskim)"
+  },
+  "help.changelog.detailedDescription": {
+    "en": "Just type in 'changelog' to see the changelog.",
+    "pl": "Po prostu wprowadź komendę 'changelog' żeby zobaczyć listę zmian."
+  },
+  "help.repo.description": {
+    "en": "go to github repository page",
+    "pl": "otwiera stronę repozytorium na githubie"
+  },
+  "help.repo.detailedDescription": {
+    "en": "Opens github repository that contains source code of this page.",
+    "pl": "Otwiera repozytorium na githubie zawierajace kod źródłowy tej strony."
+  },
+  "repo.didnOpenMessage": {
+    "en": "If your browser didn't open a link, just click on it: [link=${0}]${0}[/link]",
+    "pl": "Jeżeli twoja przeglądarka nie otworzyła linku, po prostu kliknij: [link=${0}]${0}[/link]"
   }
 }

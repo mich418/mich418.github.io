@@ -1,10 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 const { version } = require('./package.json')
 
 module.exports = function(env) {
-  console.log(env.prod)
   return {
     mode: env.prod ? 'production' : 'development',
     devtool: env.prod ? 'source-map' : 'inline-source-map',
@@ -29,6 +30,10 @@ module.exports = function(env) {
           test: /\.(png|svg|jpg|jpeg|gif|pdf)$/i,
           type: 'asset/resource',
         },
+        {
+          test: /\.md$/i,
+          type: 'asset/source'
+        }
       ],
     },
     plugins: [
@@ -36,7 +41,14 @@ module.exports = function(env) {
         template: './src/index.html',
         title: `mihau.co (v${version})`
       }),
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
+      new ESLintPlugin({
+        extensions: ['js', 'ts'],
+        fix: !!env.fix
+      }),
+      new StylelintPlugin({
+        fix: !!env.fix
+      })
     ],
     devServer: {
       static: './dist',

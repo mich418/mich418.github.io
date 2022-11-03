@@ -1,4 +1,4 @@
-import {sleep} from './helpers'
+import {sleep, objectHasOwnProperty} from './helpers/helpers'
 
 interface ClassNames {
   main: string,
@@ -27,17 +27,164 @@ interface KeyDescription {
 class Conzole {
   private mainElement: HTMLElement
   private classNames: ClassNames
-  private busy: boolean = false
+  private busy = false
   private inputHandlers: inputHandler[] = []
   private history: string[] = []
-  private histroyIndex: number = -1
-  private beforeHistroyInput: string = ''
+  private histroyIndex = -1
+  private beforeHistroyInput = ''
   private currentActiveLine: HTMLTextAreaElement | null = null
+  private speedUpLazyPrint = false
 
-  constructor(el: HTMLElement, namespace: string = 'conzole') {
+  constructor(el: HTMLElement, namespace = 'conzole') {
     this.mainElement = el
     this.createClassNames(namespace)
     this.prepareMainElement()
+  }
+
+  async print(output: string | string[], lazy: boolean | lazyPrintOptions = false, classModifier?: string) {
+    if (this.busy) throw(new Error('Conzole is busy right now'))
+
+    this.busy = true
+    const line = this.createNewLine(classModifier)
+    const linesToPrint = typeof output === 'string' ? [output] : [...output]
+    const keyListener = lazy 
+      ? (event: KeyboardEvent) =>  {
+        if (event.key === ' ') {
+          this.speedUpLazyPrint = true
+        }
+      }
+      : null
+
+    if (keyListener) {
+      document.body.addEventListener('keyup', keyListener)
+    }
+
+    for (let lineToPrint of linesToPrint) {
+      const subline = this.createNewSublineElement()
+      line.appendChild(subline)
+
+      if (lazy) {
+        await this.printLazy(subline, lineToPrint, typeof lazy === 'object' ? lazy : undefined)
+        if (!this.speedUpLazyPrint) await sleep(100)
+      } else {
+        const linksMatch = lineToPrint.match(/\[link=.*?].*?\[\/link\]/g)
+
+        if (linksMatch) {
+          for (const linkMatch of linksMatch) {
+            const [, linkHref, linkText] = linkMatch.match(/\[link=(.*?)](.*?)\[\/link\]/)
+            lineToPrint = lineToPrint.replace(linkMatch, `<a class="${this.classNames.link}" href="${linkHref}" target="_blank">${linkText}</a>`)
+          }
+        }
+
+        subline.innerHTML = lineToPrint
+      }
+    }
+
+    if (keyListener) {
+      document.body.removeEventListener('keyup', keyListener)
+      this.speedUpLazyPrint = false
+    }
+
+    this.busy = false
+  }
+
+  async printKeyDescriptionList(keyDescriptionList: KeyDescription[], minSpace = 3) {
+    const linesToPrint: string[] = []
+    let longestKeyLength = 0
+
+    for (const keyDescription of keyDescriptionList) {
+      if (keyDescription.key.length > longestKeyLength) {
+        longestKeyLength = keyDescription.key.length
+      }
+    }
+
+    for (const keyDescription of keyDescriptionList) {
+      const space = minSpace + (longestKeyLength - keyDescription.key.length)
+      linesToPrint.push(`${keyDescription.key}${new Array(space).fill('&nbsp;').join('')}${keyDescription.description}`)
+    }
+
+    await this.print(linesToPrint)
+  }
+
+  async input() {
+    this.currentActiveLine = this.createNewInputLine()
+
+    const keyUpListener = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        const inputText = this.currentActiveLine.value
+        const subline = this.createNewSublineElement()
+
+        this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
+        subline.innerText = inputText
+        this.currentActiveLine.parentElement.appendChild(subline)
+    
+        this.currentActiveLine.removeEventListener('keyup', keyUpListener)
+        this.currentActiveLine.remove()
+
+        this.addToHistory(inputText)
+        this.resetHistoryActions()
+
+        if (inputText.trim()) {
+          this.executeInputHandlers(inputText)
+        } else {
+          this.input()
+        }
+      } else if (event.key === 'ArrowUp') {
+        this.goToPrevInHistory()
+      } else if (event.key === 'ArrowDown') {
+        this.goToNextInHistory()
+      } else {
+        this.histroyIndex = -1
+      }
+    }
+
+    this.currentActiveLine.addEventListener('keyup', keyUpListener)
+    this.currentActiveLine.focus()
+  }
+
+  question(question: string): Promise<string> {
+    const questionLine = `${question}: `
+    this.currentActiveLine = this.createNewInputLine()
+    this.currentActiveLine.value = questionLine
+
+    return new Promise((resolve) => {
+      const inputListener = () => {
+        if (this.currentActiveLine.value.length < questionLine.length) {
+          this.currentActiveLine.value = questionLine
+        }
+      }
+
+      const keyUpListener = (event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          const inputText = this.currentActiveLine.value
+          const subline = this.createNewSublineElement()
+  
+          this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
+          subline.innerText = inputText
+          this.currentActiveLine.parentElement.appendChild(subline)
+      
+          this.currentActiveLine.removeEventListener('keyup', keyUpListener)
+          this.currentActiveLine.removeEventListener('input', inputListener)
+          this.currentActiveLine.remove()
+  
+          resolve(inputText.replace(questionLine, '').trim())
+        }
+      }
+
+      this.currentActiveLine.addEventListener('keyup', keyUpListener)
+      this.currentActiveLine.addEventListener('input', inputListener)
+      this.currentActiveLine.focus()
+    })
+  }
+
+  focus() {
+    if (this.currentActiveLine) {
+      this.currentActiveLine.focus()
+    }
+  }
+
+  onInput(callback: inputHandler) {
+    this.inputHandlers.push(callback)
   }
 
   private createClassNames(namespace: string) {
@@ -112,15 +259,17 @@ class Conzole {
     let printedText = ''
 
     for (let i = 0; i < textSplitted.length; i++) {
-      if (inTextPauses[i]) {
+      if (inTextPauses[i] && !this.speedUpLazyPrint) {
         await sleep(inTextPauses[i])
       }
 
-      const time = !options.hasOwnProperty('pauseMinTime')
-        ? options.pauseMaxTime 
-        : Math.round((Math.random() * (options.pauseMaxTime - options.pauseMinTime)) + options.pauseMinTime)
+      if (!this.speedUpLazyPrint) {
+        const time = !objectHasOwnProperty(options, 'pauseMinTime')
+          ? options.pauseMaxTime 
+          : Math.round((Math.random() * (options.pauseMaxTime - options.pauseMinTime)) + options.pauseMinTime)
 
-      await sleep(time)
+        await sleep(this.speedUpLazyPrint ? 0 : time)
+      }
 
       printedText += textSplitted[i]
       element.innerHTML = printedText
@@ -128,58 +277,9 @@ class Conzole {
   }
 
   private executeInputHandlers(inputText: string) {
-    for (let inputHandler of this.inputHandlers) {
+    for (const inputHandler of this.inputHandlers) {
       inputHandler(inputText)
     }
-  }
-
-  async print(output: string | string[], lazy: boolean | lazyPrintOptions = false, classModifier?: string) {
-    if (this.busy) throw(new Error('Conzole is busy right now'))
-
-    this.busy = true
-    const line = this.createNewLine(classModifier)
-    const linesToPrint = typeof output === 'string' ? [output] : [...output]
-
-    for (let lineToPrint of linesToPrint) {
-      const subline = this.createNewSublineElement()
-      line.appendChild(subline)
-
-      if (lazy) {
-        await this.printLazy(subline, lineToPrint, typeof lazy === 'object' ? lazy : undefined)
-        await sleep(100)
-      } else {
-        const linksMatch = lineToPrint.match(/\[link=.*?].*?\[\/link\]/g)
-
-        if (linksMatch) {
-          for (let linkMatch of linksMatch) {
-            const [, linkHref, linkText] = linkMatch.match(/\[link=(.*?)](.*?)\[\/link\]/)
-            lineToPrint = lineToPrint.replace(linkMatch, `<a class="${this.classNames.link}" href="${linkHref}" target="_blank">${linkText}</a>`)
-          }
-        }
-
-        subline.innerHTML = lineToPrint
-      }
-    }
-
-    this.busy = false
-  }
-
-  async printKeyDescriptionList(keyDescriptionList: KeyDescription[], minSpace: number = 3) {
-    const linesToPrint: string[] = []
-    let longestKeyLength = 0
-
-    for (let keyDescription of keyDescriptionList) {
-      if (keyDescription.key.length > longestKeyLength) {
-        longestKeyLength = keyDescription.key.length
-      }
-    }
-
-    for (let keyDescription of keyDescriptionList) {
-      const space = minSpace + (longestKeyLength - keyDescription.key.length)
-      linesToPrint.push(`${keyDescription.key}${new Array(space).fill('&nbsp;').join('')}${keyDescription.description}`)
-    }
-
-    await this.print(linesToPrint)
   }
 
   private addToHistory(inputText: string) {
@@ -226,87 +326,6 @@ class Conzole {
   private resetHistoryActions() {
     this.histroyIndex = -1
     this.beforeHistroyInput = ''
-  }
-
-  async input() {
-    this.currentActiveLine = this.createNewInputLine()
-
-    const keyUpListener = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        const inputText = this.currentActiveLine.value
-        const subline = this.createNewSublineElement()
-
-        this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
-        subline.innerText = inputText
-        this.currentActiveLine.parentElement.appendChild(subline)
-    
-        this.currentActiveLine.removeEventListener('keyup', keyUpListener)
-        this.currentActiveLine.remove()
-
-        this.addToHistory(inputText)
-        this.resetHistoryActions()
-
-        if (inputText.trim()) {
-          this.executeInputHandlers(inputText)
-        } else {
-          this.input()
-        }
-      } else if (event.key === 'ArrowUp') {
-        this.goToPrevInHistory()
-      } else if (event.key === 'ArrowDown') {
-        this.goToNextInHistory()
-      } else {
-        this.histroyIndex === -1
-      }
-    }
-
-    this.currentActiveLine.addEventListener('keyup', keyUpListener)
-    this.currentActiveLine.focus()
-  }
-
-  question(question: string): Promise<string> {
-    const questionLine = `${question}: `
-    this.currentActiveLine = this.createNewInputLine()
-    this.currentActiveLine.value = questionLine
-
-    return new Promise((resolve) => {
-      const inputListener = (event: InputEvent) => {
-        if (this.currentActiveLine.value.length < questionLine.length) {
-          this.currentActiveLine.value = questionLine
-        }
-      }
-
-      const keyUpListener = (event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
-          const inputText = this.currentActiveLine.value
-          const subline = this.createNewSublineElement()
-  
-          this.currentActiveLine.parentElement.classList.remove(this.classNames.lineUserInputActive)
-          subline.innerText = inputText
-          this.currentActiveLine.parentElement.appendChild(subline)
-      
-          this.currentActiveLine.removeEventListener('keyup', keyUpListener)
-          this.currentActiveLine.removeEventListener('input', inputListener)
-          this.currentActiveLine.remove()
-  
-          resolve(inputText.replace(questionLine, '').trim())
-        }
-      }
-
-      this.currentActiveLine.addEventListener('keyup', keyUpListener)
-      this.currentActiveLine.addEventListener('input', inputListener)
-      this.currentActiveLine.focus()
-    })
-  }
-
-  focus() {
-    if (this.currentActiveLine) {
-      this.currentActiveLine.focus()
-    }
-  }
-
-  onInput(callback: inputHandler) {
-    this.inputHandlers.push(callback)
   }
 }
 
