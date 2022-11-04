@@ -4,13 +4,17 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [1.3.0] - DATE-TO-ADD
+## [1.3.0] - 2021-11-04
 
 ### Added
 
 - 'changelog' command (prints project changelog)
 - 'repo' command (opens project repository)
 - eslint and stylelint
+
+### Changed
+
+- skip "lazy print" on spacebar keyup
 
 ### Fixed
 
