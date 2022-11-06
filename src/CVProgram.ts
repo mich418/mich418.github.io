@@ -1,6 +1,6 @@
 import Program, {DataObject, RunResult} from './Program'
 import I18n from './I18n'
-import CVpdf from './assets/michal_koczkodon_cv_30-Oct-2022.pdf'
+import CVpdf from './assets/michal_koczkodon_cv_10-Nov-2022.pdf'
 
 class CVProgram extends Program {
   constructor(i18n: I18n) {
@@ -43,7 +43,7 @@ class CVProgram extends Program {
     link.style.display = 'none'
     link.target="_blank"
     link.href = CVpdf
-    link.download = "michal_koczkodon_cv_30-Oct-2022.pdf"
+    link.download = "michal_koczkodon_cv_10-Nov-2022.pdf"
 
     document.body.appendChild(link)
     link.click()
