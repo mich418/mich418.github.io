@@ -132,8 +132,8 @@
     "pl": "Po prostu wprowadź komendę 'cv' aby pobrać moje CV"
   },
   "help.cvProgram.downloadInfo": {
-    "en": "Document you're going to download doesn't contain contact info such as phone number and email address. If you want to get in touch, please try on [link=https://www.linkedin.com/in/mihauco/]linkedin[/link]. Please be aware that if you're recruiter and you will send me an offer that I will not be interested in then I will not answer you back.",
-    "pl": "Dokument, który zaraz pobierzesz, nie zawiera informacji takich jak numer telefonu czy adres email. Jeżeli chcesz sie ze mną skontaktować, spróbuj przez [link=https://www.linkedin.com/in/mihauco/]linkedin[/link]. Bądź proszę świadom/świadoma, że jeżeli jesteś rekruterem/rekruterką, i wyślesz mi ofertę, którą nie jestem zainteresowany, po prostu Ci nie odpowiem."
+    "en": "Sorry, CV is no longer available to download",
+    "pl": "Wybacz, chwilowo CV jest niedostępne"
   },
   "help.cvProgram.downloadProceed": {
     "en": "PRESS ENTER TO PROCEED",
