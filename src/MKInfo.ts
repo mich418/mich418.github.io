@@ -1,5 +1,5 @@
 import Conzole from './Conzole'
-import I18n from './i18n'
+import I18n from './I18n'
 import logo from './logo'
 import translations from './translations.json'
 import Program from './Program'
@@ -8,7 +8,7 @@ import AboutProgram from './AboutProgram'
 import LinksProgram from './LinksProgram'
 import EloRapProgram from './EloRapProgram'
 import HelpProgram from './HelpProgram'
-import CVProgram from './CVProgram'
+import PrivacyPolicyProgram from './PrivacyPolicyProgram'
 import ChangeLogProgram from './ChangeLogProgram'
 import RepoProgram from './RepoProgram'
 import optionsManager from './OptionsManager'
@@ -20,6 +20,7 @@ class MKInfo {
   private conzole: Conzole
   private i18n: I18n
   private lang: string
+  private privacyPolicyProgram: PrivacyPolicyProgram
   private programs: Program[]
 
   constructor(mainEl: HTMLElement) {
@@ -29,12 +30,13 @@ class MKInfo {
     this.conzole = new Conzole(this.mainEl, 'mk-info')
     this.lang = this.getLang()
     this.i18n = new I18n(translations, this.lang, 'en')
+    this.privacyPolicyProgram = new PrivacyPolicyProgram(this.i18n)
     this.programs = [
       new OptionsProgram(this.i18n),
       new AboutProgram(this.i18n),
       new LinksProgram(this.i18n),
       new EloRapProgram(this.i18n),
-      new CVProgram(this.i18n),
+      this.privacyPolicyProgram,
       new ChangeLogProgram(this.i18n),
       new RepoProgram(this.i18n)
     ]
@@ -46,6 +48,9 @@ class MKInfo {
 
   async start() {
     await this.printLogo()
+    await this.conzole.print('')
+    await this.printPrivacyPolicy()
+    this.privacyPolicyProgram.bindPrivacyLink()
     await this.conzole.print('')
     await this.printHelloMessage()
 
@@ -67,7 +72,7 @@ class MKInfo {
 
   private async printLogo() {
     const logoLines = logo.split('\n').filter(line => !!line.length)
-    let belowLogoInfo: string | string[] = `v${packagejson.version}|© 2022 Michal Koczkodon`
+    let belowLogoInfo: string | string[] = `v${packagejson.version}|© ${new Date().getFullYear()} Michal Koczkodon`
     let longestLogoLine = -1
 
     for (const line of logoLines) {
@@ -85,6 +90,10 @@ class MKInfo {
     }
 
     await this.conzole.print(belowLogoInfo, false, 'app-info')
+  }
+
+  private async printPrivacyPolicy() {
+    await this.conzole.print(this.i18n.key('helloPrivacy'))
   }
 
   private async printHelloMessage() {
