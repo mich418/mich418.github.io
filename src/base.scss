@@ -41,3 +41,17 @@ html {
   background-color: var(--background-color-main);
   color: var(--text-color-main);
 }
+
+a {
+  color: var(--text-color-main);
+  text-decoration: underline;
+
+  &:visited {
+    color: var(--text-color-main);
+  }
+
+  &:hover {
+    color: var(--text-color-main);
+    text-decoration: none;
+  }
+}

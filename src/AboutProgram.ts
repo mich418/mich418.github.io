@@ -32,7 +32,7 @@ class AboutProgram extends Program {
     const dialog = new Dialog(
       this.getContent(),
       {
-        name: 'About',
+        name: this.i18n.key('about.title'),
         width: 600,
         buttonOk: this.i18n.key('button.close')
       }

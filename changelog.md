@@ -4,7 +4,23 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [1.3.0] - 2021-11-04
+## [1.4.0] - 2023-06-21
+
+### Added
+
+- privacy policy
+
+### Removed
+
+- CVProgram kicked out completly
+
+### Fixed
+
+- missing translations
+- copyright year is now always up to date (2022 was hardcoded before)
+- year in previous log message (2021 -> 2022)
+
+## [1.3.0] - 2022-11-04
 
 ### Added
 
@@ -53,6 +69,7 @@ It's nothing special, I just created it to learn more / play with changelog form
 - app with all basic functionalities
 - gh-pages to deploy project as github page
 
+[1.4.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/mihauco/mihauco.github.io/compare/v1.0.0...v1.1.0
