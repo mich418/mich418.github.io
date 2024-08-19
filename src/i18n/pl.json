@@ -1,0 +1,10 @@
+{
+  "navigation": {
+    "link": {
+      "home": "cześć",
+      "about": "o mnie",
+      "texts": "teksty",
+      "contact": "kontakt"
+    }
+  }
+}

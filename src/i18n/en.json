@@ -1,0 +1,10 @@
+{
+  "navigation": {
+    "link": {
+      "home": "hello",
+      "about": "about",
+      "texts": "texts",
+      "contact": "contact"
+    }
+  }
+}

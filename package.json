@@ -1,40 +1,34 @@
 {
-  "name": "mk-info",
-  "version": "1.5.0",
-  "description": "",
-  "main": "index.js",
-  "homepage": "https://mihauco.github.io",
+  "name": "mihau.co",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "node cleanDist.js && webpack serve --open",
-    "dev:fix": "node cleanDist.js && webpack serve --open --env=fix",
-    "build": "node cleanDist.js && webpack --env=prod",
-    "predeploy": "npm run build && node generateCNAME.js",
-    "deploy": "gh-pages -d dist"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "css-loader": "^6.7.1",
-    "eslint": "^8.26.0",
-    "eslint-webpack-plugin": "^3.2.0",
-    "gh-pages": "^4.0.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "rimraf": "^3.0.2",
-    "sass": "^1.49.9",
-    "sass-loader": "^12.6.0",
-    "stylelint-config-standard-scss": "^6.0.0",
-    "ts-loader": "^9.2.8",
-    "typescript": "^4.6.2",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "stylelint-config-recommended": "^9.0.0",
-    "stylelint-webpack-plugin": "^3.3.0"
+    "vue": "^3.3.11",
+    "vue-i18n": "^9.14.0",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/node": "^18.19.3",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/tsconfig": "^0.5.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "npm-run-all2": "^6.1.1",
+    "sass": "^1.70.0",
+    "typescript": "~5.3.0",
+    "vite": "^5.0.10",
+    "vue-tsc": "^1.8.25"
   }
 }
