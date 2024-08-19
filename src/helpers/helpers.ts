@@ -1,15 +1,11 @@
-export function isMobile() {
-  return window.innerWidth <= 600
-}
+export function generateRandomString(length: number = 10): string {
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()';
+  let result = '';
 
-export function objectHasOwnProperty(object: object, prop: string) {
-  return Object.prototype.hasOwnProperty.call(object, prop)
-}
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters[randomIndex];
+  }
 
-export function sleep(time: number): Promise<number> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(time)
-    }, time)
-  })
+  return result;
 }

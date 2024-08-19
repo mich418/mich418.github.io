@@ -1,0 +1,32 @@
+@import './variables/variables.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  font-size: 16px;
+  background-color: var(--background-color);
+  color: var(--font-color-base);
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: var(--font-color-base);
+  text-underline-offset: 3px;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
