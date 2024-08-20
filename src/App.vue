@@ -9,6 +9,11 @@
         :is-active="mobileMenuOpen"
         @click="mobileMenuOpen = !mobileMenuOpen"
       />
+      <div
+        v-if="mobileMenuOpen"
+        class="page__mobile-overlay"
+        @click="mobileMenuOpen = false"
+      />
       <Header class="page__header" />
       <Navigation class="page__navigation" />
       <RouterView class="page__content" />
@@ -40,56 +45,91 @@ watch(() => route.path, () => {
 @use './variables/variables' as variables;
 
 .page {
+  --mobile-left-padding: calc(var(--page-x-spacing) * 2 + var(--burger-menu-button-size));
   width: 100%;
   max-width: 840px;
   margin: 0 auto;
+  overflow-x: hidden;
 
   &--mobile-menu-open {
-    @media (max-width: variables.$breakpoint - 1px) {
-      overflow-x: hidden;
+    .page__grid {
+      left: calc(var(--navigation-width) - var(--mobile-left-padding) + var(--page-x-spacing));
 
-      .page__grid {
-        transform: translateX(90px);
+      @media (min-width: variables.$breakpoint) {
+        left: 0;
       }
+    }
 
-      .page__navigation {
-        transform: translateX(-30px);
+    .page__navigation {
+      left: 0;
+
+      @media (min-width: variables.$breakpoint) {
+        left: auto;
       }
+    }
 
-      .page__header,
-      .page__content,
-      .page__footer {
-        opacity: .6;
+    .page__header,
+    .page__content,
+    .page__footer {
+      pointer-events: none;
+      opacity: .4;
+
+      @media (min-width: variables.$breakpoint) {
+        opacity: 1;
+        pointer-events: unset;
       }
     }
   }
 
   &__grid {
-    display: block;
+    display: grid;
     position: relative;
+    left: 0;
     width: 100%;
-    padding: 20px 20px 20px 70px;
-    transition: transform .2s;
+    min-height: 100vh;
+    padding:
+      var(--page-y-spacing)
+      var(--page-x-spacing)
+      var(--page-y-spacing)
+      var(--mobile-left-padding);
+    transition: left .2s;
+    grid-template-columns: auto;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    row-gap: 20px;
 
     @media (min-width: variables.$breakpoint) {
       width: 840px;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 160px auto;
+      padding: var(--page-y-spacing) var(--page-x-spacing);
+      grid-template-columns: var(--navigation-width) auto;
       grid-template-areas:
         '. header'
         'navigation main'
         '. footer';
       grid-template-rows: auto 1fr auto;
       column-gap: 40px;
-      row-gap: 20px;
     }
   }
 
   &__mobile-menu-trigger {
     position: fixed;
-    top: 48px;
-    left: 20px;
+    top: 38px;
+    left: var(--page-x-spacing);
+
+    @media (min-width: variables.$breakpoint) {
+      display: none;
+    }
+  }
+
+  &__mobile-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: var(--mobile-left-padding);
 
     @media (min-width: variables.$breakpoint) {
       display: none;
@@ -101,14 +141,17 @@ watch(() => route.path, () => {
   }
 
   &__navigation {
-    grid-area: navigation;
-    transition: transform .2s;
+    transition: left .2s;
+    position: fixed;
+    left: calc(-1 * var(--navigation-width));
+    top: 112px;
 
-    @media (max-width: variables.$breakpoint - 1px) {
-      position: fixed;
-      left: 0;
-      transform: translateX(-100%);
-      top: 100px;
+    @media (min-width: variables.$breakpoint) {
+      grid-area: navigation;
+      position: static;
+      left: auto;
+      top: auto;
+      transform: none;
     }
   }
 

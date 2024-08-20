@@ -27,10 +27,12 @@ const navigationLinks = navigation.map(navigationLink => ({
 
 <style lang="scss">
 nav {
+  width: var(--navigation-width);
+
   ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 3px 0 0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
