@@ -2,5 +2,11 @@
   --background-color: #0D1821;
   --font-color-base: #eaf4ff;
   --font-color-disabled: #778da9;
-  --burger-menu-color: var(--font-color-base);
+  --burger-menu-button-color: var(--font-color-base);
+  --burger-menu-button-size: 30px;
+  --page-y-spacing: 20px;
+  --page-x-spacing: 20px;
+  --navigation-width: 140px;
+  --navigation-z-index: 200;
+  --overlay-z-index: 100;
 }

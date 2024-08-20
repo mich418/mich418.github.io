@@ -1,6 +1,6 @@
 <template>
   <main class="content">
-    <h1><AnimatedText :text="title" :time="500"/></h1>
+    <h1 class="content__title"><AnimatedText :text="title" :time="500"/></h1>
     <slot />
   </main>
 </template>
@@ -14,5 +14,9 @@ defineProps<{
 </script>
 
 <style lang="scss">
-
+.content {
+  &__title {
+    margin-top: 0;
+  }
+}
 </style>
