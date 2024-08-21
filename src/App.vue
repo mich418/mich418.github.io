@@ -93,7 +93,7 @@ watch(() => route.path, () => {
       var(--page-y-spacing)
       var(--mobile-left-padding);
     transition: left .2s;
-    grid-template-columns: auto;
+    grid-template-columns: 100%;
     grid-template-rows: min-content 1fr min-content;
     grid-template-areas:
       'header'
@@ -116,7 +116,7 @@ watch(() => route.path, () => {
 
   &__mobile-menu-trigger {
     position: fixed;
-    top: 38px;
+    top: calc(var(--logo-height, 75px) / 2);
     left: var(--page-x-spacing);
 
     @media (min-width: variables.$breakpoint) {
@@ -144,7 +144,7 @@ watch(() => route.path, () => {
     transition: left .2s;
     position: fixed;
     left: calc(-1 * var(--navigation-width));
-    top: 112px;
+    top: calc(var(--logo-height, 75px) + 45px);
 
     @media (min-width: variables.$breakpoint) {
       grid-area: navigation;
@@ -152,6 +152,7 @@ watch(() => route.path, () => {
       left: auto;
       top: auto;
       transform: none;
+      padding-top: 5px;
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="navigation">
     <ul>
       <li
         v-for="link in navigationLinks"

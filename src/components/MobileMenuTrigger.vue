@@ -29,7 +29,6 @@ const emit = defineEmits(['click']);
     transform: translate(-50%, -50%);
     width: 100%;
     height: 3px;
-    border-radius: 3px;
     background-color: var(--burger-menu-button-color);
 
     &::before,
@@ -38,7 +37,6 @@ const emit = defineEmits(['click']);
       position: absolute;
       width: 100%;
       height: 3px;
-      border-radius: 3px;
       background-color: var(--burger-menu-button-color);
       transform-origin: center left;
       transition: all .2s;
