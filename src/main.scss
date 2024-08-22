@@ -1,6 +1,8 @@
 // TODO: self-host fonts
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-@import './variables/variables.css';
+@import 'normalize.css';
+@import '@/variables/variables.css';
+@import '@/helpers/utilityClasses.scss';
 
 * {
   box-sizing: border-box;
@@ -34,3 +36,4 @@ a:active {
 a:hover {
   text-decoration: none;
 }
+

@@ -1,5 +1,5 @@
 <template>
-  <Content title="Hello">
+  <Content :title="t('contentTitles.home')">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis enim at nisi vehicula tempus eu ac metus. Aliquam lacus risus, mollis nec nisi eu, iaculis vehicula est. Quisque varius ornare dolor vitae lacinia. Donec pulvinar ornare tortor, ut vulputate risus dignissim ut. Mauris ornare congue risus vel congue. Vivamus luctus sodales molestie. Etiam a ullamcorper tellus. Cras id commodo tellus. Etiam pulvinar, metus nec vestibulum eleifend, ligula ante rhoncus purus, a mollis ipsum lorem at massa. Donec libero sem, egestas ac est a, aliquam ultrices sem. Aenean nec iaculis magna, quis fringilla neque. Phasellus feugiat, purus id aliquet volutpat, urna purus sodales nibh, vitae imperdiet purus dolor in lectus. Nam dictum in sem a rhoncus. Aliquam commodo vel lorem vitae maximus. Aenean iaculis sagittis orci a lacinia. Proin egestas aliquet risus eu dictum.
 
 Duis quis turpis a risus blandit maximus at sit amet erat. Ut ac facilisis augue. Sed gravida a lacus ut maximus. Praesent at posuere velit, at dictum ex. Cras viverra velit vel libero tincidunt convallis. Quisque eget laoreet massa, id posuere nunc. Integer id eros tincidunt, euismod nunc vel, hendrerit erat. Aenean gravida nulla vitae fringilla consectetur.
@@ -14,4 +14,7 @@ Cras sed aliquam augue. Integer ullamcorper accumsan ipsum, vitae iaculis purus 
 
 <script setup lang="ts">
 import Content from '../components/Content.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>

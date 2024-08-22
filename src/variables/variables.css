@@ -1,6 +1,8 @@
 :root {
   --background-color: #0D1821;
-  --font-color-base: #eaf4ff;
+  --forground-color: #eaf4ff;
+  --font-color-base: var(--forground-color);
+  --font-color-inverted: var(--background-color);
   --font-color-disabled: #778da9;
   --burger-menu-button-color: var(--font-color-base);
   --burger-menu-button-size: 30px;
@@ -9,4 +11,8 @@
   --navigation-width: 140px;
   --navigation-z-index: 200;
   --overlay-z-index: 100;
+  --button-height: 34px;
+  --button-primary-font-color: var(--font-color-inverted);
+  --button-primary-background-color: var(--font-color-base);
+  --button-primary-border-color: var(--font-color-base);
 }

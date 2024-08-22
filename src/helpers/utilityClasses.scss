@@ -1,0 +1,7 @@
+.pixelated-border {
+  box-shadow:
+    calc(-1 * var(--pixelated-border-width, 3px)) 0 0 0 var(--pixelated-border-color, #000),
+    var(--pixelated-border-width, 3px) 0 0 0 var(--pixelated-border-color, #000),
+    0 calc(-1 * var(--pixelated-border-width, 3px)) 0 0 var(--pixelated-border-color, #000),
+    0 var(--pixelated-border-width, 3px) 0 0 var(--pixelated-border-color, #000);
+}
