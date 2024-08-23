@@ -4,6 +4,7 @@
       "home": "cześć",
       "about": "o mnie",
       "texts": "teksty",
+      "code": "kod",
       "contact": "kontakt"
     }
   },
@@ -11,6 +12,7 @@
     "home": "Cześć!",
     "about": "O mnie",
     "texts": "Teksty",
+    "code": "Kod",
     "contact": "Kontakt"
   },
   "blogPost": {
