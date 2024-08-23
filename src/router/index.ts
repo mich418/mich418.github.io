@@ -6,7 +6,7 @@ const router = createRouter({
   routes: navigation.map((route) => ({
     name: route.name,
     path: route.path,
-    component: () => import(`../views/${route.componentName}`)
+    component: () =>  import(/* @vite-ignore */ `../views/${route.componentName}`)
   }))
 })
 
