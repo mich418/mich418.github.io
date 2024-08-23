@@ -28,6 +28,11 @@ export const navigation: {
     componentName: 'TextsView.vue'
   },
   {
+    path: '/code',
+    name: 'code',
+    componentName: 'CodeView.vue'
+  },
+  {
     path: '/contact',
     name: 'contact',
     componentName: 'ContactView.vue'

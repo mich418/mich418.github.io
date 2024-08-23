@@ -4,6 +4,7 @@
       "home": "hello",
       "about": "about",
       "texts": "texts",
+      "code": "code",
       "contact": "contact"
     }
   },
@@ -11,6 +12,7 @@
     "home": "Hello!",
     "about": "About",
     "texts": "Texts",
+    "code": "Code",
     "contact": "Contact"
   },
   "blogPost": {
