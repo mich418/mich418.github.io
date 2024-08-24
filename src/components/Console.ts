@@ -1,4 +1,4 @@
-import { logo } from '../variables/variables'
+import { logoMICHALDEV } from '../variables/variables'
 
 class Console {
   constructor() {
@@ -6,8 +6,8 @@ class Console {
   }
 
   printLogo() {
-    for (let i = 0; i < logo.length; i++) {
-      console.log(logo[i])
+    for (let i = 0; i < logoMICHALDEV.lines.length; i++) {
+      console.log(logoMICHALDEV.lines[i])
     }
   }
 }
