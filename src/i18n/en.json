@@ -15,6 +15,17 @@
     "code": "Code",
     "contact": "Contact"
   },
+  "home": {
+    "paragraphs": [
+      "I'm Michał (pronounce me-how) and that's my website.",
+      "Nice to see you here."
+    ]
+  },
+  "about": {
+    "paragraphs": [
+      "My name is Michał (I'm polish, so pronounce it \"me-how\" or just use english version Michael). And as you guessed - I'm from Poland. The guy in the picture is me."
+    ]
+  },
   "blogPost": {
     "readArticle": "Read article"
   }

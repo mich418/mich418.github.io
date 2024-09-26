@@ -24,7 +24,7 @@ import GlitchTextLine from '@/components/GlitchTextLine.vue'
 const element = ref<HTMLElement | null>(null)
 const lines = ref<typeof GlitchTextLine[]>([])
 
-const logo: LogoASCII = logoMIHAUCO
+const logo: LogoASCII = logoMICHALDEV
 
 const calculateVars = () => {
   if (!element.value) return
