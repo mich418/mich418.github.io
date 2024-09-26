@@ -15,6 +15,17 @@
     "code": "Kod",
     "contact": "Kontakt"
   },
+  "home": {
+    "paragraphs": [
+      "Ja jestem Michał, a to jest moja strona.",
+      "Fajnie, że jesteś."
+    ]
+  },
+  "about": {
+    "paragraphs": [
+      "Mam na imię Michał. Z Polski. Typ na zdjęciu to ja."
+    ]
+  },
   "blogPost": {
     "readArticle": "Czytaj artykuł"
   }

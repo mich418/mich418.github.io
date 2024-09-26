@@ -14,14 +14,17 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import { setPrefferedLanguage } from '@/helpers/helpers';
+import type { SupportedLanguage } from '@/types'
 
 const { locale } = useI18n()
 
-const setLocale = (lang: string) => {
+const setLocale = (lang: SupportedLanguage) => {
+  setPrefferedLanguage(lang);
   locale.value = lang;
 }
 
-const langs = ['pl', 'en']
+const langs: SupportedLanguage[] = ['pl', 'en']
 </script>
 <style lang="scss">
 .lang-switch {

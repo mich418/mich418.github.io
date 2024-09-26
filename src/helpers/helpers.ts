@@ -1,3 +1,5 @@
+import type { SupportedLanguage } from '@/types';
+
 export function generateRandomString(length: number = 10): string {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()';
   let result = '';
@@ -37,4 +39,18 @@ export function setDynamicGlobalCSSVar(name: string, value: string) {
   css += '}';
 
   style.textContent = css;
+}
+
+export function getPrefferedLanguage(): SupportedLanguage {
+  let lang = localStorage.getItem('prefferedLang');
+
+  if (!lang) {
+    lang = navigator.language.split('-')[0];
+  }
+
+  return lang === 'pl' ? 'pl' : 'en';
+}
+
+export function setPrefferedLanguage(lang: SupportedLanguage) {
+  localStorage.setItem('prefferedLang', lang);
 }
