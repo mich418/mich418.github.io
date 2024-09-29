@@ -7,9 +7,8 @@
         class="blog-post__link"
         :href="url"
         target="_blank"
-      >
-        {{ t('blogPost.readArticle') }}
-      </Button>
+        :text="t('blogPost.readArticle') "
+      />
     </div>
   </article>
 </template>

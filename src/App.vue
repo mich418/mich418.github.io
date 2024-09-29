@@ -18,6 +18,9 @@
       <Navigation class="page__navigation" />
       <RouterView class="page__content" />
       <Footer class="page__footer" />
+      <PrivacyNotice
+        class="page__privacy-notice"
+      />
     </div>
   </div>
 </template>
@@ -25,16 +28,19 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import Header from './components/Header.vue'
-import Navigation from './components/Navigation.vue'
-import Footer from './components/Footer.vue'
-import Console from './components/Console'
-import MobileMenuTrigger from './components/MobileMenuTrigger.vue'
+import { usePrivacy } from '@/composables/privacy'
+import Header from '@/components/Header.vue'
+import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
+import Console from '@/components/Console'
+import MobileMenuTrigger from '@/components/MobileMenuTrigger.vue'
+import PrivacyNotice from '@/components/PrivacyNotice.vue'
 
 new Console()
 
 const mobileMenuOpen = ref(false)
 const route = useRoute()
+const { privacyAcnowledged } = usePrivacy()
 
 watch(() => route.path, () => {
   mobileMenuOpen.value = false
@@ -47,7 +53,7 @@ watch(() => route.path, () => {
 .page {
   --mobile-left-padding: calc(var(--page-x-spacing) * 2 + var(--burger-menu-button-size));
   width: 100%;
-  max-width: 840px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
   overflow-x: hidden;
 
@@ -102,7 +108,7 @@ watch(() => route.path, () => {
     row-gap: 20px;
 
     @media (min-width: variables.$breakpoint) {
-      width: 840px;
+      width: var(--page-max-width);
       padding: var(--page-y-spacing) var(--page-x-spacing);
       grid-template-columns: var(--navigation-width) auto;
       grid-template-areas:

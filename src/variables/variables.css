@@ -1,5 +1,7 @@
 :root {
+  --page-max-width: 840px;
   --background-color: #0D1821;
+  --background-color-secondary: #303b47;
   --forground-color: #eaf4ff;
   --font-color-base: var(--forground-color);
   --font-color-inverted: var(--background-color);
