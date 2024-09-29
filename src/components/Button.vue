@@ -5,21 +5,28 @@
     :target="target"
     class="button pixelated-border"
     @click="onClick"
+    @mouseenter="onMouseEnter"
   >
-    <span class="button__label">
-      <slot></slot>
-    </span>
+    <GlitchTextLine
+      ref="label"
+      class="button__label"
+      :text="props.text"
+    />
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import GlitchTextLine from './GlitchTextLine.vue';
 
 const props = defineProps<{
   href?: string;
   disabled?: boolean;
   target?: '_blank' | '_self' | '_parent' | '_top';
+  text: string;
 }>()
+
+const label = ref<typeof GlitchTextLine | null>(null);
 
 const emit = defineEmits<{
   click: [MouseEvent];
@@ -34,6 +41,11 @@ const onClick = (event: MouseEvent) => {
   }
 
   emit('click', event)
+}
+
+const onMouseEnter = () => {
+  if (props.disabled) return
+  if (label.value) label.value.glitch()
 }
 </script>
 
