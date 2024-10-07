@@ -41,6 +41,7 @@ const { acnowledgePrivacy } = usePrivacy();
   background-color: var(--background-color-secondary);
   display: flex;
   align-items: center;
+  z-index: 1000;
 
   &__locker-icon {
     width: 34px;
