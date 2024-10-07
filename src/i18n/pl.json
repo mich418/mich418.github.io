@@ -28,5 +28,10 @@
   },
   "blogPost": {
     "readArticle": "Czytaj artykuł"
+  },
+  "contact": {
+    "paragraphs": [
+      "Jeżeli z jakiegoś powodu chcesz się ze mną skontaktować, to najprościej będzie Ci mnie złapać na social mediach."
+    ]
   }
 }
