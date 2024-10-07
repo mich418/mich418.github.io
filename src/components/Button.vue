@@ -7,6 +7,11 @@
     @click="onClick"
     @mouseenter="onMouseEnter"
   >
+    <Icon
+      v-if="props.icon"
+      class="button__icon"
+      :name="props.icon"
+    />
     <GlitchTextLine
       ref="label"
       class="button__label"
@@ -17,13 +22,15 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import GlitchTextLine from './GlitchTextLine.vue';
+import Icon from '@/components/Icon.vue';
+import GlitchTextLine from '@/components/GlitchTextLine.vue';
 
 const props = defineProps<{
   href?: string;
   disabled?: boolean;
   target?: '_blank' | '_self' | '_parent' | '_top';
   text: string;
+  icon?: string;
 }>()
 
 const label = ref<typeof GlitchTextLine | null>(null);
@@ -61,6 +68,8 @@ const onMouseEnter = () => {
   text-decoration: none;
   background-color: var(--button-primary-background-color);
   cursor: pointer;
+  border: none;
+  font-family: var(--font-family);
 
   &:hover,
   &:visited {
@@ -70,6 +79,18 @@ const onMouseEnter = () => {
 
   &:active {
     transform: translateY(3px);
+  }
+
+  &:has(.button__icon) {
+    padding-left: calc(var(--button-height));
+  }
+
+  &__icon {
+    width: calc(var(--button-height) - 8px);
+    height: calc(var(--button-height) - 8px);
+    position: absolute;
+    left: 2px;
+    top: 2px;
   }
 
   &__label {

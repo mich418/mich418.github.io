@@ -1,4 +1,5 @@
 :root {
+  --font-family: 'Source Code Pro', monospace;
   --page-max-width: 840px;
   --background-color: #0D1821;
   --background-color-secondary: #303b47;
