@@ -1,23 +1,25 @@
 <template>
   <Content :title="t('contentTitles.contact')">
-    <p>contact...</p>
-    <Button
-      text="Github"
-      icon="github"
-      href="/"
-    />
-    <hr>
-    <Button
-      text="Linkedin"
-      icon="linkedin"
-      href="/"
-    />
-    <hr>
-    <Button
-      text="Twitter"
-      icon="twitter"
-      href="/"
-    />
+    <div class="contact">
+      <p>{{ t('contact.paragraphs[0]') }}</p>
+      <div class="contact__buttons">
+        <Button
+          text="Github"
+          icon="github"
+          href="/"
+        />
+        <Button
+          text="Linkedin"
+          icon="linkedin"
+          href="/"
+        />
+        <Button
+          text="Twitter"
+          icon="twitter"
+          href="/"
+        />
+      </div>
+    </div>
   </Content>
 </template>
 
@@ -28,3 +30,14 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 </script>
+
+<style lang="scss">
+.contact {
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 24px;
+  }
+}
+</style>
