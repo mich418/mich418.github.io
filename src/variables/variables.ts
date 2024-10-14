@@ -48,11 +48,11 @@ export const navigation: {
     name: 'texts',
     componentName: 'TextsView.vue'
   },
-  {
-    path: '/code',
-    name: 'code',
-    componentName: 'CodeView.vue'
-  },
+  // {
+  //   path: '/code',
+  //   name: 'code',
+  //   componentName: 'CodeView.vue'
+  // },
   {
     path: '/contact',
     name: 'contact',
