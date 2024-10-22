@@ -39,7 +39,7 @@ module.exports = function(env) {
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        title: `mihau.co (v${version})`
+        title: `michal.dev (v${version})`
       }),
       new MiniCssExtractPlugin(),
       new ESLintPlugin({

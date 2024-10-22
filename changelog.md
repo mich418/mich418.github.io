@@ -4,6 +4,11 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [1.5.0] - 2024-10-22
+
+### Changed
+- domain name mihau.co -> michal.dev
+
 ## [1.4.0] - 2023-06-21
 
 ### Added
