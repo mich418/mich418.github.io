@@ -19,6 +19,7 @@
       <RouterView class="page__content" />
       <Footer class="page__footer" />
       <PrivacyNotice
+        v-if="!privacyAcnowledged"
         class="page__privacy-notice"
       />
     </div>

@@ -6,6 +6,8 @@
         :image-src="myFace"
       />
       <p v-html="t('about.paragraphs[0]')"/>
+      <p v-html="t('about.paragraphs[1]')"/>
+      <p v-html="t('about.paragraphs[2]')"/>
     </div>
   </Content>
 </template>

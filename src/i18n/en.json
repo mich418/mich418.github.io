@@ -5,7 +5,8 @@
       "about": "about",
       "texts": "texts",
       "code": "code",
-      "contact": "contact"
+      "contact": "contact",
+      "privacy": "privacy"
     }
   },
   "contentTitles": {
@@ -13,7 +14,8 @@
     "about": "About",
     "texts": "Texts",
     "code": "Code",
-    "contact": "Contact"
+    "contact": "Contact",
+    "privacy": "Privacy"
   },
   "home": {
     "paragraphs": [
@@ -23,7 +25,9 @@
   },
   "about": {
     "paragraphs": [
-      "My name is Michał (I'm polish, so pronounce it \"me-how\" or just use english version Michael). And as you guessed - I'm from Poland. The guy in the picture is me."
+      "My name is Michał (I'm polish, so pronounce it \"me-how\" or just use english version Michael). And as you guessed - I'm from Poland. The guy in the picture is me.",
+      "I'm working as a web developer for a few years now. Most of my professional life I spent in <a href=\"https://www.creativestyle.pl/\" target=\"_blank\">creativestyle</a>.",
+      "Sometimes I write <a href=\"/texts\">nonsense</a>. As a developer I'm big fan of <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. As a person, I'm a big fan of cold beer in a hammock out in nature."
     ]
   },
   "blogPost": {
@@ -31,7 +35,7 @@
   },
   "privacyNotice": {
     "title": "Privacy Notice",
-    "text": "This website does not collect, store, or process any personal data and it does not use any cookies, anyway, this website is hosted on <a href=\"https://pages.github.com/\" target=\"_blank\">GitHub Pages</a>, so the <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement\" target=\"_blank\">GitHub Privacy Statement</a> applies.",
+    "text": "This website does not collect, store, or process any personal data, and it does not use cookies. However, since this website is hosted on <a href=\"https://pages.github.com/\" target=\"_blank\">GitHub Pages</a>, the <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement\" target=\"_blank\">GitHub Privacy Statement</a> applies. For statistical purposes, <a href=\"https://www.cloudflare.com/en-gb/web-analytics/\" target=\"_blank\">Cloudflare Web Analytics</a> is used.",
     "acknowledge": "OK"
   },
   "contact": {

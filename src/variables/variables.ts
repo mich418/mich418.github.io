@@ -31,22 +31,26 @@ export const logoMICHALDEV: LogoASCII = {
 export const navigation: {
   name: string,
   path: string,
-  componentName: string
+  componentName: string,
+  showInNavigation: boolean
 }[] = [
   {
     path: '/',
     name: 'home',
-    componentName: 'HomeView.vue'
+    componentName: 'HomeView.vue',
+    showInNavigation: true
   },
   {
     path: '/about',
     name: 'about',
-    componentName:'AboutView.vue'
+    componentName:'AboutView.vue',
+    showInNavigation: true
   },
   {
     path: '/texts',
     name: 'texts',
-    componentName: 'TextsView.vue'
+    componentName: 'TextsView.vue',
+    showInNavigation: true
   },
   // {
   //   path: '/code',
@@ -56,6 +60,13 @@ export const navigation: {
   {
     path: '/contact',
     name: 'contact',
-    componentName: 'ContactView.vue'
+    componentName: 'ContactView.vue',
+    showInNavigation: true
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    componentName: 'PrivacyView.vue',
+    showInNavigation: false
   }
 ]
