@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs'
 
 if (fs.existsSync('./dist')) {
   fs.appendFileSync('./dist/CNAME', 'michal.dev', {flag: 'w'})

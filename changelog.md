@@ -4,7 +4,12 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [2.0.0] - 2024-10-22
+## [2.0.1] - 2024-10-27
+
+### Fixed
+- quick fix build and deploy script
+
+## [2.0.0] - 2024-10-27
 
 ### Changed
 - new version!
