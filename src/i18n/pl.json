@@ -5,7 +5,8 @@
       "about": "o mnie",
       "texts": "teksty",
       "code": "kod",
-      "contact": "kontakt"
+      "contact": "kontakt",
+      "privacy": "prywatność"
     }
   },
   "contentTitles": {
@@ -13,7 +14,8 @@
     "about": "O mnie",
     "texts": "Teksty",
     "code": "Kod",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "privacy": "Prywatność"
   },
   "home": {
     "paragraphs": [
@@ -23,11 +25,18 @@
   },
   "about": {
     "paragraphs": [
-      "Mam na imię Michał. Z Polski. Typ na zdjęciu to ja."
+      "Mam na imię Michał. Z Polski. Typ na zdjęciu to ja.",
+      "Od kilku lat pracuję jako web developer. Większość swojego zawodowego życia spędziłem w <a href=\"https://www.creativestyle.pl/\" target=\"_blank\">creativestyle</a>.",
+      "Zdaża mi się pisać <a href=\"/texts\">głupoty</a>. Jako deweloper jestem wielkim fanem <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. Jako człowiek jestem wielkim fanem zimnego piwa w hamaku na łonie natury."
     ]
   },
   "blogPost": {
     "readArticle": "Czytaj artykuł"
+  },
+  "privacyNotice": {
+    "title": "Info o prywatności",
+    "text": "Ta strona internetowa nie zbiera, nie przechowuje ani nie przetwarza żadnych danych osobowych i nie używa plików cookies. Ponieważ jednak strona jest hostowana na <a href=\"https://pages.github.com/\" target=\"_blank\">GitHub Pages</a>, obowiązuje <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement\" target=\"_blank\">Polityka Prywatności GitHub</a>. W celach statystycznych wykorzystywana jest usługa <a href=\"https://www.cloudflare.com/en-gb/web-analytics/\" target=\"_blank\">Cloudflare Web Analytics</a>.",
+    "acknowledge": "OK"
   },
   "contact": {
     "paragraphs": [

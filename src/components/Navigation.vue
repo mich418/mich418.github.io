@@ -24,10 +24,12 @@ import LangSwitch from '@/components/LangSwitch.vue';
 const { t } = useI18n();
 
 const navigationLinks = computed(() => {
-  return navigation.map(navigationLink => ({
-    path: navigationLink.path,
-    name: t(`navigation.link.${navigationLink.name}`),
-  }))
+  return navigation
+    .filter(navigationLink => navigationLink.showInNavigation)
+    .map(navigationLink => ({
+      path: navigationLink.path,
+      name: t(`navigation.link.${navigationLink.name}`),
+    }))
 })
 </script>
 

@@ -6,17 +6,20 @@
         <Button
           text="Github"
           icon="github"
-          href="/"
+          href="https://github.com/mihauco"
+          target="_blank"
         />
         <Button
           text="Linkedin"
           icon="linkedin"
-          href="/"
+          href="https://www.linkedin.com/in/michalkoczkodon/"
+          target="_blank"
         />
         <Button
           text="Twitter"
           icon="twitter"
-          href="/"
+          href="https://x.com/mihauco"
+          target="_blank"
         />
       </div>
     </div>
@@ -24,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import Content from '../components/Content.vue';
+import Content from '@/components/Content.vue';
 import Button from '@/components/Button.vue';
 import { useI18n } from 'vue-i18n';
 
