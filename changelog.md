@@ -4,6 +4,11 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.0.3] - 2024-10-27
+
+### Fixed
+- change routing mode to hash (for github pages)
+
 ## [2.0.2] - 2024-10-27
 
 ### Fixed
