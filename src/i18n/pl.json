@@ -27,7 +27,7 @@
     "paragraphs": [
       "Mam na imię Michał. Z Polski. Typ na zdjęciu to ja.",
       "Od kilku lat pracuję jako web developer. Większość swojego zawodowego życia spędziłem w <a href=\"https://www.creativestyle.pl/\" target=\"_blank\">creativestyle</a>.",
-      "Zdaża mi się pisać <a href=\"/texts\">głupoty</a>. Jako deweloper jestem wielkim fanem <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. Jako człowiek jestem wielkim fanem zimnego piwa w hamaku na łonie natury."
+      "Zdaża mi się pisać <a href=\"/#/texts\">głupoty</a>. Jako deweloper jestem wielkim fanem <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. Jako człowiek jestem wielkim fanem zimnego piwa w hamaku na łonie natury."
     ]
   },
   "blogPost": {

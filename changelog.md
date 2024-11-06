@@ -4,6 +4,11 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.0.4] - 2024-11-06
+
+### Fixed
+- fix link to texts in about page
+
 ## [2.0.3] - 2024-10-27
 
 ### Fixed

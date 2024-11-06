@@ -27,7 +27,7 @@
     "paragraphs": [
       "My name is Michał (I'm polish, so pronounce it \"me-how\" or just use english version Michael). And as you guessed - I'm from Poland. The guy in the picture is me.",
       "I'm working as a web developer for a few years now. Most of my professional life I spent in <a href=\"https://www.creativestyle.pl/\" target=\"_blank\">creativestyle</a>.",
-      "Sometimes I write <a href=\"/texts\">nonsense</a>. As a developer I'm big fan of <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. As a person, I'm a big fan of cold beer in a hammock out in nature."
+      "Sometimes I write <a href=\"/#/texts\">nonsense</a>. As a developer I'm big fan of <a href=\"https://vuejs.org/\" target=\"_blank\">Vue.js</a>. As a person, I'm a big fan of cold beer in a hammock out in nature."
     ]
   },
   "blogPost": {
