@@ -4,6 +4,12 @@ List of changes in project will be documented in this file.
 
 It's nothing special, I just created it to learn more / play with changelog format. Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [2.0.4] - 2024-11-17
+
+### Changed
+- repo/project name
+- link to github (I changed user name from mihauco -> mich418)
+
 ## [2.0.4] - 2024-11-06
 
 ### Fixed

@@ -6,7 +6,7 @@
         <Button
           text="Github"
           icon="github"
-          href="https://github.com/mihauco"
+          href="https://github.com/mich418"
           target="_blank"
         />
         <Button
